@@ -1,0 +1,28 @@
+; Dyuti Global Theme defaults — applied when a user selects (or ships with) the
+; Dyuti look-and-feel. These set the whole desktop's identity in one place.
+
+[kdeglobals][KDE]
+LookAndFeelPackage=in.dyuti.lookandfeel
+widgetStyle=Breeze
+
+[kdeglobals][General]
+ColorScheme=Dyuti
+AccentColor=255,157,77
+
+[kdeglobals][Icons]
+Theme=Papirus-Dark
+
+[plasmarc][Theme]
+name=default
+
+[kwinrc][org.kde.kdecoration2]
+library=org.kde.breeze
+theme=Breeze
+
+[Wallpaper]
+defaultWallpaperTheme=dyuti
+Image=/usr/share/backgrounds/dyuti/dyuti-default.svg
+
+[ksplashrc][KSplash]
+Theme=in.dyuti.lookandfeel
+Engine=KSplashQML

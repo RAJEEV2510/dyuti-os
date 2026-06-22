@@ -2,8 +2,9 @@
 # The custom global theme (Month 2) will supersede the theme keys here.
 
 [General]
-ColorScheme=BreezeDark
-Name=Breeze Dark
+ColorScheme=Dyuti
+Name=Dyuti
+AccentColor=255,157,77
 widgetStyle=Breeze
 shadeSortColumn=true
 # UI / reading fonts (installed via look.list)
@@ -19,7 +20,7 @@ Theme=Papirus-Dark
 [KDE]
 # Double-click to open — familiar for users migrating from Windows.
 SingleClick=false
-LookAndFeelPackage=org.kde.breezedark.desktop
+LookAndFeelPackage=in.dyuti.lookandfeel
 AnimationDurationFactor=0.875
 contrast=4
 

@@ -1,0 +1,17 @@
+{
+    "KPackageStructure": "Plasma/LookAndFeel",
+    "KPlugin": {
+        "Authors": [
+            {
+                "Email": "hello@example.in",
+                "Name": "Dyuti Project"
+            }
+        ],
+        "Category": "",
+        "Description": "Dyuti OS desktop look — radiance theme (saffron on indigo), smooth and consistent.",
+        "Id": "in.dyuti.lookandfeel",
+        "License": "GPL-3.0+",
+        "Name": "Dyuti",
+        "Version": "0.1"
+    }
+}
