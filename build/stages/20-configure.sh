@@ -9,7 +9,7 @@ source "${HERE}/lib.sh"
 require_root
 [[ -d "${CHROOT_DIR}/usr/bin" ]] || die "no chroot — run stage 10-bootstrap first"
 
-# --- apt sources (full Ubuntu archive: base + security + updates) -------------
+# --- apt sources (full base archive: base + security + updates) --------------
 log "writing apt sources"
 cat > "${CHROOT_DIR}/etc/apt/sources.list" <<EOF
 deb ${BASE_MIRROR} ${BASE_SUITE} ${BASE_COMPONENTS//,/ }

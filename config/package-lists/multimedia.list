@@ -1,5 +1,5 @@
 # Media codecs so audio/video "just works" out of the box (no EULA prompts —
-# we avoid ubuntu-restricted-extras and install the codec stack directly).
+# we avoid the restricted-extras metapackage and install the codec stack directly).
 
 gstreamer1.0-plugins-base
 gstreamer1.0-plugins-good

@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Runs INSIDE the chroot. Strips every user-visible Ubuntu/KDE mark so the system
+# Runs INSIDE the chroot. Strips every user-visible upstream mark so the system
 # presents only as Dyuti. (Required by upstream trademark policy when remixing;
 # licenses are still honoured — this is branding, not code removal.)
 
@@ -24,9 +24,9 @@ printf '%s OS \\n \\l\n\n' "${DISTRO_NAME}" > /etc/issue
 printf '%s OS\n' "${DISTRO_NAME}" > /etc/issue.net
 : > /etc/motd
 
-# --- kill Ubuntu's dynamic MOTD ("Welcome to Ubuntu", news, ads) -------------
+# --- kill the upstream dynamic MOTD (welcome text, news, ads) ----------------
 if [ -d /etc/update-motd.d ]; then
-  say "disabling Ubuntu dynamic MOTD scripts"
+  say "disabling dynamic MOTD scripts"
   chmod -x /etc/update-motd.d/* 2>/dev/null || true
 fi
 if [ -f /etc/default/motd-news ]; then
@@ -34,7 +34,7 @@ if [ -f /etc/default/motd-news ]; then
 fi
 systemctl disable motd-news.timer 2>/dev/null || true
 
-# --- live session identity (casper defaults to a user named "ubuntu") --------
+# --- live session identity (the live-boot default user is renamed to Dyuti) --
 say "writing /etc/casper.conf"
 LIVE_USER="$(echo "${DISTRO_NAME}" | tr '[:upper:]' '[:lower:]')"
 cat > /etc/casper.conf <<EOF
@@ -55,8 +55,8 @@ if [ -f /etc/default/grub ]; then
   fi
 fi
 
-# --- purge Ubuntu-branded fluff (best-effort; minbase has little anyway) ------
-say "purging Ubuntu branding packages (best-effort)"
+# --- purge upstream-branded fluff (best-effort; minbase has little anyway) ----
+say "purging upstream branding packages (best-effort)"
 for p in \
     ubuntu-wallpapers ubuntu-wallpapers-noble \
     plymouth-theme-ubuntu-text plymouth-theme-ubuntu-logo \

@@ -1,9 +1,9 @@
 # Roadmap
 
 Working name **Dyuti** (Sanskrit: *radiance / light*). Original, smooth-UX
-desktop for India — consumers **and** government. Ubuntu 24.04 LTS base, KDE
-Plasma engine. Monetised via Free + Pro editions, support/SLA, OEM preloads,
-govt tenders, custom services.
+desktop for India — consumers **and** government. A stable 24.04 LTS Linux base
+with a modern, fully-reshaped Qt desktop engine. Monetised via Free + Pro
+editions, support/SLA, OEM preloads, govt tenders, custom services.
 
 ---
 
@@ -14,7 +14,7 @@ momentum. Scope is deliberately cut (see "Deferred").
 
 | Week | Deliverable | Repo touchpoints |
 |---|---|---|
-| **W1** | Linux build env up; first bootable ISO (Ubuntu + Plasma) | `build/`, `chroot/`, `config/` (this scaffold) |
+| **W1** | Linux build env up; first bootable ISO (base + desktop) | `build/`, `chroot/`, `config/` (this scaffold) |
 | **W2** | Branding package: theme, wallpaper, distinct look; own APT repo + GPG keys | `branding/`, new `repo/` infra |
 | **W3** | Lean languages (Hindi + 1–2), IBus input; first-boot wizard; Calamares branding | `chroot/install-languages.sh`, `branding/etc/calamares/` |
 | **W4** | QA on VMs, smoothness pass, update-through-repo test, cut Alpha, hand to testers | `docs/`, `dist/` |
@@ -44,7 +44,7 @@ momentum. Scope is deliberately cut (see "Deferred").
 ---
 
 ## Decisions locked
-- Base: Ubuntu 24.04 LTS · Engine: KDE Plasma · Display: Wayland-capable (X11 fallback)
+- Base: stable 24.04 LTS Linux · Engine: modern Qt desktop · Display: Wayland-capable (X11 fallback)
 - Markets: consumers + government (dual)
 - Money: Free + Pro + support + OEM + tenders + services
 - Name: **parked** ("Dyuti" working title); revisit before public beta

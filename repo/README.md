@@ -15,7 +15,7 @@ through infra *you* run, hosted in India.
 | `client/build-keyring-deb.sh` | builds `dyuti-archive-keyring.deb` (key + source) for the ISO |
 | `keys/` | exported public key (created by `setup-repo.sh`) |
 
-## First run (on your repo server, Ubuntu)
+## First run (on your repo server, Linux)
 
 ```bash
 sudo apt install -y aptly gnupg

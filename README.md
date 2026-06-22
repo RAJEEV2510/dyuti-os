@@ -1,9 +1,9 @@
 # Dyuti OS (working name)
 
-An original, smooth-UX desktop Linux distribution built for India — for everyday
-consumers **and** government bodies. Built on **Ubuntu 24.04 LTS** with a
-reshaped **KDE Plasma** desktop, Indian-language support out of the box, and an
-India-hosted update/security backbone.
+An original, smooth-UX desktop operating system built for India — for everyday
+consumers **and** government bodies. Dyuti pairs a stable, long-term-support
+Linux foundation with a fully reshaped, modern desktop, Indian-language support
+out of the box, and an India-hosted update/security backbone.
 
 > **Name is a placeholder.** "Dyuti" (Sanskrit: *radiance / light*) is the
 > working name. Everything is parameterised in `build/config.sh`, so the brand
@@ -16,8 +16,8 @@ India-hosted update/security backbone.
 A scripted, reproducible pipeline that builds a bootable, installable **live ISO**:
 
 ```
-Ubuntu 24.04 base  →  KDE Plasma desktop  →  curated apps  →  Indian languages
-   →  your branding package  →  Calamares installer  →  hybrid BIOS+UEFI ISO
+stable Linux base  →  reshaped desktop  →  curated apps  →  Indian languages
+   →  Dyuti branding  →  graphical installer  →  hybrid BIOS+UEFI ISO
 ```
 
 The output is `dist/dyuti-<version>-amd64.iso`.
@@ -30,20 +30,19 @@ The ISO **must be built on Linux**. Two options:
 
 ### Option A — WSL2 (fastest to start)
 ```powershell
-wsl --install -d Ubuntu-24.04
+wsl --install
 ```
-Then open the Ubuntu shell and continue below. (Note: the final ISO-assembly
-step uses loop/squashfs tooling — WSL2 handles chroot + debootstrap fine; if the
-ISO step misbehaves, use Option B.)
+Then open the Linux shell and continue below. (Note: the final ISO-assembly
+step uses loop/squashfs tooling; if it misbehaves on WSL, use Option B.)
 
-### Option B — a real Ubuntu 24.04 VM or machine (most reliable)
-Use VirtualBox/VMware/Hyper-V or bare metal running Ubuntu 24.04.
+### Option B — a Linux VM or machine (most reliable)
+Use VirtualBox/VMware/Hyper-V or bare metal running a current Linux release.
 
 ### Install the toolchain (inside Linux)
 ```bash
 sudo apt update
 sudo apt install -y debootstrap squashfs-tools xorriso grub-pc-bin \
-  grub-efi-amd64-bin grub-common mtools dosfstools rsync ca-certificates
+  grub-efi-amd64-bin grub-common mtools dosfstools rsync ca-certificates make
 ```
 
 ---
@@ -74,26 +73,26 @@ sudo make clean            # remove the work tree
 
 | Path | Purpose |
 |---|---|
-| `build/config.sh` | **All** tunables: name, version, base suite, mirror, arch |
+| `build/config.sh` | **All** tunables: name, version, base, mirror, arch |
 | `build/build.sh` | Orchestrator — runs stages in order |
 | `build/lib.sh` | Shared helpers (logging, mount/umount, chroot exec) |
 | `build/stages/` | The pipeline: bootstrap → configure → desktop → branding → cleanup → iso |
-| `chroot/` | Scripts that run *inside* the chroot (desktop, system, languages) |
-| `config/package-lists/` | Package sets (desktop / apps / languages) |
-| `branding/dyuti-branding/` | The branding `.deb` source (theme, wallpaper, os-release) |
-| `docs/` | Architecture, build notes, roadmap |
+| `chroot/` | Scripts that run *inside* the chroot (desktop, system, languages, rebrand) |
+| `config/package-lists/` | Package sets (desktop / apps / look / multimedia / languages) |
+| `branding/dyuti-branding/` | The Dyuti branding `.deb` (theme, wallpaper, splash, login, installer) |
+| `repo/` | Signed APT repository scaffold (update/security backbone) |
+| `docs/` | Architecture, build notes, roadmap, rebranding coverage |
 | `dist/` | Output ISOs (git-ignored) |
 
 ---
 
 ## Status
 
-`v0.1-alpha` — Quarter-1, Month-1 target: first bootable, branded ISO.
-See `docs/ROADMAP.md`.
+`v0.1-alpha` — first bootable, fully-branded ISO. See `docs/ROADMAP.md`.
 
 ## Licensing note
 
-This builds on Ubuntu/Debian packages under their respective open-source
-licenses (mostly GPL). You may rebrand and distribute, but you must honour those
-licenses and **must not** imply Canonical/Ubuntu endorsement. Keep your own
-trademark on the brand assets in `branding/`. See `docs/ARCHITECTURE.md`.
+Dyuti is assembled from open-source components under their respective licenses
+(mostly GPL). You may rebrand and distribute, but you must honour those licenses
+and provide source. Keep your own trademark on the brand assets in `branding/`.
+See `docs/ARCHITECTURE.md`.

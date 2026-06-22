@@ -9,7 +9,7 @@ SHELL := /bin/bash
 help:
 	@echo "Dyuti OS build targets:"
 	@echo "  make build       - run the full pipeline -> dist/*.iso"
-	@echo "  make bootstrap   - stage 10: debootstrap Ubuntu base"
+	@echo "  make bootstrap   - stage 10: debootstrap the base system"
 	@echo "  make configure   - stage 20: apt sources, locale, mounts"
 	@echo "  make desktop     - stage 30: KDE Plasma + apps + languages"
 	@echo "  make branding    - stage 40: build + install branding .deb"

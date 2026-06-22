@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Stage 10 — debootstrap a minimal Ubuntu base into the chroot.
+# Stage 10 — debootstrap a minimal base system into the chroot.
 
 set -euo pipefail
 HERE="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"

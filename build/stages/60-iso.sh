@@ -47,7 +47,8 @@ menuentry "Try ${DISTRO_NAME} (safe graphics)" {
 }
 EOF
 
-# A marker file Ubuntu's casper looks for to identify the live medium.
+# A marker file the live-boot system (casper) looks for to identify the medium.
+# (Filename is fixed by the live-boot tooling — functional, not branding.)
 touch "${ISO_DIR}/ubuntu"
 mkdir -p "${ISO_DIR}/.disk"
 echo "${DISTRO_NAME} ${DISTRO_VERSION} \"${DISTRO_CODENAME}\" - live amd64" \

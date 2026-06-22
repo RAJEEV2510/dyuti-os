@@ -12,9 +12,9 @@ export DISTRO_URL="https://example.in"      # placeholder until domain is chosen
 export DISTRO_TAGLINE="A smooth desktop, made for India."
 
 # ---- Base distro --------------------------------------------------------------
-export BASE_SUITE="noble"                   # Ubuntu 24.04 LTS = noble
-# Use an India mirror for speed/sovereignty once validated:
-#   http://in.archive.ubuntu.com/ubuntu
+export BASE_SUITE="noble"                   # 24.04 LTS series = noble
+# Package archive (software source). Swap to your own India-hosted mirror for
+# speed + sovereignty once validated, e.g. http://in.archive.example.in/...
 export BASE_MIRROR="http://archive.ubuntu.com/ubuntu"
 export BASE_COMPONENTS="main,restricted,universe,multiverse"
 export ARCH="amd64"

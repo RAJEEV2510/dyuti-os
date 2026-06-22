@@ -7,16 +7,17 @@ the toolchain, then run the pipeline.
 
 ### Option A — WSL2 (quickest)
 ```powershell
-wsl --install -d Ubuntu-24.04
+wsl --install
 ```
-Reboot if prompted, set a username/password, then open the **Ubuntu** terminal.
+Reboot if prompted, set a username/password, then open the **Linux** terminal.
 
 > WSL2 note: `debootstrap`, `chroot`, and `mksquashfs` work. If stage 60 (ISO
 > assembly with loop/EFI images) misbehaves on your WSL kernel, use Option B for
 > that step. Everything up to stage 50 is fine on WSL2.
 
-### Option B — Ubuntu 24.04 VM or bare metal (most reliable)
-Any VirtualBox/VMware/Hyper-V VM or machine running Ubuntu 24.04.
+### Option B — a Linux VM or bare metal (most reliable)
+Any VirtualBox/VMware/Hyper-V VM or machine running a current Debian-family
+Linux (24.04 LTS series).
 
 ## 2. Install the toolchain (inside Linux)
 ```bash
