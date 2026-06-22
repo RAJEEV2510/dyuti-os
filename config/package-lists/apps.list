@@ -45,8 +45,7 @@ cups
 system-config-printer
 network-manager-openvpn
 
-# ---- Welcome app runtime (Qt QML) --------------------------------------------
-qmlscene                       # provided by qtdeclarative5-dev-tools on some releases
+# ---- Welcome app runtime (Qt QML; qmlscene comes from the dev-tools pkg) ------
 qtdeclarative5-dev-tools
 qml-module-qtquick-controls2
 qml-module-qtquick-layouts

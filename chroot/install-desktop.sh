@@ -39,9 +39,11 @@ apt_install \
   discover laptop-detect os-prober \
   network-manager systemd-sysv sudo
 
-# --- KDE Plasma desktop (strict) ----------------------------------------------
-say "installing KDE Plasma desktop"
-apt_install $(read_list "${LISTS}/desktop.list")
+# --- desktop: a tiny essential set is strict, the rest is resilient -----------
+say "installing desktop essentials"
+apt_install plasma-desktop plasma-workspace sddm xserver-xorg
+say "installing remaining desktop packages"
+apt_install_soft $(read_list "${LISTS}/desktop.list")
 
 # --- curated default applications (soft) --------------------------------------
 say "installing default applications"

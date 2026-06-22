@@ -119,18 +119,18 @@ Rectangle {
             textColor: root.ink
         }
 
-        ImageButton {
+        Button {
             id: rebootButton
-            source: "rest.svgz"
-            height: 32
+            text: "Restart"
+            width: 110; height: 32
             onClicked: sddm.reboot()
             visible: sddm.canReboot
         }
 
-        ImageButton {
+        Button {
             id: shutdownButton
-            source: "shutdown.svgz"
-            height: 32
+            text: "Shut Down"
+            width: 110; height: 32
             onClicked: sddm.powerOff()
             visible: sddm.canPowerOff
         }

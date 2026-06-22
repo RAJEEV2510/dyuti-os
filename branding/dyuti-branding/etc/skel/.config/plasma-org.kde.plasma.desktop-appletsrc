@@ -1,3 +1,7 @@
+# Default desktop + panel layout for new users.
+# A complete bottom panel (menu, task manager, tray, clock) so the desktop is
+# usable on first login. immutability=1 = Mutable, so users can still customise.
+
 [Containments][1]
 activityId=
 formfactor=0
@@ -12,7 +16,42 @@ Image=file:///usr/share/backgrounds/dyuti/dyuti-default.svg
 SlidePaths=/usr/share/backgrounds/dyuti
 
 [Containments][2]
+activityId=
 formfactor=2
 immutability=1
+lastScreen=0
 location=4
 plugin=org.kde.panel
+
+[Containments][2][General]
+AppletOrder=3;4;5;6;7;8
+
+[Containments][2][Applets][3]
+immutability=1
+plugin=org.kde.plasma.kickoff
+
+[Containments][2][Applets][3][Configuration][General]
+icon=dyuti-logo
+
+[Containments][2][Applets][4]
+immutability=1
+plugin=org.kde.plasma.icontasks
+
+[Containments][2][Applets][5]
+immutability=1
+plugin=org.kde.plasma.marginsseparator
+
+[Containments][2][Applets][6]
+immutability=1
+plugin=org.kde.plasma.systemtray
+
+[Containments][2][Applets][7]
+immutability=1
+plugin=org.kde.plasma.digitalclock
+
+[Containments][2][Applets][7][Configuration][Appearance]
+showDate=true
+
+[Containments][2][Applets][8]
+immutability=1
+plugin=org.kde.plasma.showdesktop

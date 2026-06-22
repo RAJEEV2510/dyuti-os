@@ -18,9 +18,13 @@ rm -rf "${ISO_DIR}"
 mkdir -p "${ISO_DIR}/casper" "${ISO_DIR}/boot/grub" "${ISO_DIR}/EFI/boot"
 
 # --- 1. squashfs ---------------------------------------------------------------
+# NB: keep /boot inside the squashfs — the installer copies the squashfs to disk,
+# so the kernel must be in it or installed systems won't boot. (The live session
+# boots from the separate /casper/vmlinuz copy made below.)
 log "creating squashfs (this is the slow part)"
 mksquashfs "${CHROOT_DIR}" "${ISO_DIR}/casper/filesystem.squashfs" \
-  -noappend -comp zstd -e boot
+  -noappend -comp zstd \
+  -e tmp var/cache/apt/archives
 
 # size manifest (used by the installer to show progress)
 printf "%s" "$(du -sx --block-size=1 "${CHROOT_DIR}" | cut -f1)" \
@@ -36,6 +40,9 @@ log "writing grub.cfg"
 cat > "${ISO_DIR}/boot/grub/grub.cfg" <<EOF
 set default=0
 set timeout=10
+
+# Locate the live medium (works for both BIOS El Torito and UEFI standalone).
+search --no-floppy --set=root --file /casper/vmlinuz
 
 menuentry "Try or Install ${DISTRO_NAME}" {
     linux /casper/vmlinuz boot=casper quiet splash ---

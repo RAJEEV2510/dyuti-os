@@ -6,7 +6,7 @@ plasma-workspace
 plasma-nm
 plasma-pa
 sddm
-kde-config-sddm
+sddm-kcm
 systemsettings
 dolphin
 konsole
