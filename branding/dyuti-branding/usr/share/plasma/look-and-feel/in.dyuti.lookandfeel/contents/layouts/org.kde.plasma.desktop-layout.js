@@ -19,7 +19,7 @@ panel.height = Math.round(gridUnit * 2.4);
 // Application launcher (full-screen menu feels modern; swap to kickoff if preferred)
 var launcher = panel.addWidget("org.kde.plasma.kickoff");
 launcher.currentConfigGroup = ["General"];
-launcher.writeConfig("icon", "start-here-kde-symbolic");
+launcher.writeConfig("icon", "dyuti-logo");
 
 // Pinned + running apps
 panel.addWidget("org.kde.plasma.icontasks");

@@ -35,6 +35,8 @@ ID_LIKE="ubuntu debian"
 HOME_URL="${DISTRO_URL}"
 SUPPORT_URL="${DISTRO_URL}"
 BUG_REPORT_URL="${DISTRO_URL}"
+LOGO=dyuti-logo
+ANSI_COLOR="0;38;2;255;157;77"
 EOF
 
 # Build the .deb into the work dir.

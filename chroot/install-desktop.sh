@@ -80,4 +80,7 @@ apt_install_soft calamares calamares-settings-debian || apt_install_soft calamar
 # --- system tuning ------------------------------------------------------------
 bash "${HERE}/configure-system.sh"
 
+# --- strip Ubuntu/KDE branding ------------------------------------------------
+bash "${HERE}/rebrand.sh"
+
 say "desktop install finished"
