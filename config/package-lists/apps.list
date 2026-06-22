@@ -44,3 +44,10 @@ fonts-liberation2         # metric-compatible MS-font replacements (docs look ri
 cups
 system-config-printer
 network-manager-openvpn
+
+# ---- Welcome app runtime (Qt QML) --------------------------------------------
+qmlscene                       # provided by qtdeclarative5-dev-tools on some releases
+qtdeclarative5-dev-tools
+qml-module-qtquick-controls2
+qml-module-qtquick-layouts
+qml-module-qtquick-window2

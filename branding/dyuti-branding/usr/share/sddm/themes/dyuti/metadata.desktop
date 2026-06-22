@@ -1,0 +1,12 @@
+[SddmGreeterTheme]
+Name=Dyuti
+Description=Dyuti OS login screen
+Author=Dyuti Project
+License=GPL-3.0+
+Type=sddm-theme
+Version=0.1
+Theme-Id=dyuti
+Theme-API=2.0
+MainScript=Main.qml
+ConfigFile=theme.conf
+TranslationsDirectory=

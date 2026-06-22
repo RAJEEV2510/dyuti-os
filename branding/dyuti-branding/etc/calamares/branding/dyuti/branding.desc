@@ -1,0 +1,40 @@
+---
+# Dyuti OS installer (Calamares) branding.
+componentName: dyuti
+
+welcomeStyleCalamares: false
+welcomeExpandingLogo: true
+windowExpanding: normal
+windowSize: 820px,540px
+windowPlacement: center
+
+strings:
+    productName:         Dyuti OS
+    shortProductName:    Dyuti
+    version:             0.1 alpha
+    shortVersion:        0.1
+    versionedName:       Dyuti OS 0.1 alpha "Prabha"
+    shortVersionedName:  Dyuti 0.1
+    bootloaderEntryName: Dyuti OS
+    productUrl:          https://example.in
+    supportUrl:          https://example.in
+    knownIssuesUrl:      https://example.in
+    releaseNotesUrl:     https://example.in
+    productLogo:         logo.png
+    productIcon:         logo.png
+    productWelcome:      welcome.png
+
+images:
+    productLogo:    logo.png
+    productIcon:    logo.png
+    productWelcome: welcome.png
+
+slideshow: show.qml
+slideshowAPI: 2
+
+# Match the desktop: indigo sidebar, saffron highlights.
+style:
+    sidebarBackground:    "#1b1f34"
+    sidebarText:          "#e8eaf4"
+    sidebarTextSelect:    "#ff9d4d"
+    sidebarTextHighlight: "#ff9d4d"

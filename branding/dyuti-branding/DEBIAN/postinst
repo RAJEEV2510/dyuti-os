@@ -12,6 +12,33 @@ case "$1" in
     if [ -f /usr/share/dyuti/issue ]; then
       cp /usr/share/dyuti/issue /etc/issue || true
     fi
+
+    # Register + select the Dyuti Plymouth boot splash, then refresh initramfs.
+    DYUTI_PLY=/usr/share/plymouth/themes/dyuti/dyuti.plymouth
+    if [ -f "$DYUTI_PLY" ] && command -v update-alternatives >/dev/null 2>&1; then
+      update-alternatives --install \
+        /usr/share/plymouth/themes/default.plymouth default.plymouth "$DYUTI_PLY" 200 || true
+      update-alternatives --set default.plymouth "$DYUTI_PLY" || true
+      if command -v update-initramfs >/dev/null 2>&1; then
+        update-initramfs -u || true
+      fi
+    fi
+
+    # Apply the Dyuti global look-and-feel as the system default where possible.
+    if command -v plymouth-set-default-theme >/dev/null 2>&1; then
+      plymouth-set-default-theme dyuti || true
+    fi
+
+    # Point Calamares at our branding without overwriting its settings.conf
+    # (which another package owns). Just rewrite the `branding:` line.
+    CALA=/etc/calamares/settings.conf
+    if [ -f "$CALA" ]; then
+      if grep -qE '^branding:' "$CALA"; then
+        sed -i 's/^branding:.*/branding: dyuti/' "$CALA" || true
+      else
+        echo "branding: dyuti" >> "$CALA"
+      fi
+    fi
     ;;
 esac
 

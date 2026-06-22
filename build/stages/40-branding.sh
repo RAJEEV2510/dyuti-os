@@ -14,6 +14,13 @@ require_cmd dpkg-deb
 PKG_SRC="${BRANDING_DIR}/${DISTRO_ID}-branding"
 [[ -d "${PKG_SRC}/DEBIAN" ]] || die "branding package source missing: ${PKG_SRC}"
 
+# Ensure maintainer scripts and shipped executables are +x (Windows checkouts
+# lose the bit; dpkg needs postinst executable and /usr/bin tools runnable).
+chmod 0755 "${PKG_SRC}/DEBIAN/postinst" 2>/dev/null || true
+if [[ -d "${PKG_SRC}/usr/bin" ]]; then
+  chmod 0755 "${PKG_SRC}/usr/bin/"* 2>/dev/null || true
+fi
+
 # Template the os-release with the current brand/version before packaging.
 log "templating os-release"
 mkdir -p "${PKG_SRC}/usr/lib"

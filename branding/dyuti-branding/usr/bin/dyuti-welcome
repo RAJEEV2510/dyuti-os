@@ -1,0 +1,12 @@
+#!/bin/sh
+# Launch the Dyuti Welcome app with whichever Qt QML runner is present.
+QMLFILE=/usr/share/dyuti-welcome/Welcome.qml
+
+if command -v qmlscene >/dev/null 2>&1; then
+  exec qmlscene "$QMLFILE" "$@"
+elif command -v qml >/dev/null 2>&1; then
+  exec qml "$QMLFILE" "$@"
+else
+  echo "dyuti-welcome: no Qt QML runtime found (install qml-module-qtquick-controls2)" >&2
+  exit 1
+fi

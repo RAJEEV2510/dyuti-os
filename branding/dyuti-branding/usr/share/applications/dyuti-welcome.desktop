@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=Welcome to Dyuti
+Comment=Get started with Dyuti OS
+Exec=dyuti-welcome
+Icon=start-here-kde
+Terminal=false
+Categories=System;Utility;Core;
+Keywords=welcome;setup;onboarding;getting started;

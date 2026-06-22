@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Name=Dyuti Welcome
+Comment=First-boot welcome and setup
+Exec=dyuti-welcome-firstboot
+Icon=start-here-kde
+Terminal=false
+X-GNOME-Autostart-enabled=true
+X-KDE-autostart-phase=2
+OnlyShowIn=KDE;

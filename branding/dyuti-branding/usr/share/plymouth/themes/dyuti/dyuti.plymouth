@@ -1,0 +1,8 @@
+[Plymouth Theme]
+Name=Dyuti
+Description=Dyuti OS boot splash — radiance
+ModuleName=script
+
+[script]
+ImageDir=/usr/share/plymouth/themes/dyuti
+ScriptFile=/usr/share/plymouth/themes/dyuti/dyuti.script

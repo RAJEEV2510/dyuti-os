@@ -1,0 +1,10 @@
+#!/bin/sh
+# Runs once per user (on first login). Shows the Welcome app, then never again
+# (a marker file in the user's config dir prevents repeats).
+MARK="${XDG_CONFIG_HOME:-$HOME/.config}/dyuti/.welcome-shown"
+
+[ -e "$MARK" ] && exit 0
+mkdir -p "$(dirname "$MARK")"
+touch "$MARK"
+
+exec dyuti-welcome
