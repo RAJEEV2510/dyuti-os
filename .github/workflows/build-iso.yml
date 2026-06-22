@@ -1,0 +1,56 @@
+name: Build Dyuti ISO
+
+# Build the live ISO in the cloud on every code change (docs-only pushes skipped).
+# Also runnable on demand from the Actions tab.
+on:
+  push:
+    branches: [ master ]
+    paths-ignore:
+      - '**.md'
+      - 'docs/**'
+      - '.gitignore'
+      - '.gitattributes'
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 120
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Free up disk space
+        run: |
+          sudo rm -rf /usr/share/dotnet /opt/ghc /usr/local/lib/android /opt/hostedtoolcache/CodeQL || true
+          df -h /
+
+      - name: Install build toolchain
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            debootstrap squashfs-tools xorriso \
+            grub-pc-bin grub-efi-amd64-bin grub-common \
+            mtools dosfstools rsync ca-certificates make
+
+      - name: Make scripts executable
+        run: |
+          find . -name '*.sh' -exec chmod +x {} \;
+          chmod +x branding/dyuti-branding/DEBIAN/postinst || true
+          chmod +x branding/dyuti-branding/usr/bin/* || true
+
+      - name: Build ISO
+        run: sudo make build
+
+      - name: Show result
+        run: |
+          ls -lh dist/
+          echo "ISO built successfully."
+
+      - name: Upload ISO artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: dyuti-iso
+          path: dist/*.iso
+          if-no-files-found: error
+          retention-days: 14
