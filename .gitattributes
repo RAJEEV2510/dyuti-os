@@ -1,0 +1,13 @@
+# Shell scripts and package control files MUST stay LF, even when cloned on Windows.
+*.sh        text eol=lf
+*.bash      text eol=lf
+Makefile    text eol=lf
+control     text eol=lf
+postinst    text eol=lf
+preinst     text eol=lf
+postrm      text eol=lf
+prerm       text eol=lf
+rules       text eol=lf
+changelog   text eol=lf
+*.list      text eol=lf
+*.cfg       text eol=lf

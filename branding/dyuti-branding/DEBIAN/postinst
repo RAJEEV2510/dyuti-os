@@ -1,0 +1,18 @@
+#!/bin/sh
+# Post-install for the Dyuti branding package.
+set -e
+
+case "$1" in
+  configure)
+    # Refresh font cache so any shipped fonts register.
+    if command -v fc-cache >/dev/null 2>&1; then
+      fc-cache -f >/dev/null 2>&1 || true
+    fi
+    # Branded console login banner.
+    if [ -f /usr/share/dyuti/issue ]; then
+      cp /usr/share/dyuti/issue /etc/issue || true
+    fi
+    ;;
+esac
+
+exit 0

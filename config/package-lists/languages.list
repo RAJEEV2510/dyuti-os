@@ -1,0 +1,16 @@
+# Indian-language fonts and support. Input methods (IBus/m17n) are installed by
+# chroot/install-languages.sh. Add more font packages here as you add locales.
+
+# Pan-Indic Noto fonts (covers most scripts in one shot)
+fonts-noto-cjk
+fonts-noto-ui-core
+
+# Script-specific coverage for the alpha languages
+fonts-deva           # Devanagari (Hindi, Marathi, ...)
+fonts-beng           # Bengali / Assamese
+fonts-tamil          # Tamil
+fonts-indic          # umbrella metapackage for Indic fonts
+
+# Hunspell spell-check (English India + Hindi)
+hunspell
+hunspell-en-in

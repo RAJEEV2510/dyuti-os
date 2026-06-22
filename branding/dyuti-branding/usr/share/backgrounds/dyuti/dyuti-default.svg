@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Dyuti default wallpaper. "Dyuti" = radiance: a warm light rising over deep
+     indigo. Placeholder until the designer delivers the real brand artwork. -->
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080">
+  <defs>
+    <radialGradient id="glow" cx="50%" cy="78%" r="75%">
+      <stop offset="0%"  stop-color="#ffd27a"/>
+      <stop offset="22%" stop-color="#ff9d4d"/>
+      <stop offset="48%" stop-color="#b5478f"/>
+      <stop offset="74%" stop-color="#3b2a72"/>
+      <stop offset="100%" stop-color="#0d1030"/>
+    </radialGradient>
+  </defs>
+  <rect width="1920" height="1080" fill="url(#glow)"/>
+  <circle cx="960" cy="840" r="220" fill="#ffe7b0" opacity="0.18"/>
+  <circle cx="960" cy="840" r="120" fill="#fff4d6" opacity="0.28"/>
+</svg>

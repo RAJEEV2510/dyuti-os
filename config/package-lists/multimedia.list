@@ -1,0 +1,10 @@
+# Media codecs so audio/video "just works" out of the box (no EULA prompts —
+# we avoid ubuntu-restricted-extras and install the codec stack directly).
+
+gstreamer1.0-plugins-base
+gstreamer1.0-plugins-good
+gstreamer1.0-plugins-bad
+gstreamer1.0-plugins-ugly
+gstreamer1.0-libav
+gstreamer1.0-vaapi          # GPU-accelerated video decode where available
+libavcodec-extra            # extra audio/video codecs

@@ -1,0 +1,30 @@
+# Dyuti OS default desktop look. Tasteful, premium defaults for the alpha.
+# The custom global theme (Month 2) will supersede the theme keys here.
+
+[General]
+ColorScheme=BreezeDark
+Name=Breeze Dark
+widgetStyle=Breeze
+shadeSortColumn=true
+# UI / reading fonts (installed via look.list)
+font=Cantarell,10,-1,5,50,0,0,0,0,0
+fixed=Fira Code,10,-1,5,50,0,0,0,0,0
+menuFont=Cantarell,10,-1,5,50,0,0,0,0,0
+smallestReadableFont=Cantarell,8,-1,5,50,0,0,0,0,0
+toolBarFont=Cantarell,10,-1,5,50,0,0,0,0,0
+
+[Icons]
+Theme=Papirus-Dark
+
+[KDE]
+# Double-click to open — familiar for users migrating from Windows.
+SingleClick=false
+LookAndFeelPackage=org.kde.breezedark.desktop
+AnimationDurationFactor=0.875
+contrast=4
+
+[KScreen]
+ScaleFactor=1
+
+[WM]
+activeFont=Cantarell,10,-1,5,50,0,0,0,0,0

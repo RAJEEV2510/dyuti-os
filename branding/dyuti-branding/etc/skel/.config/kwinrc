@@ -1,0 +1,26 @@
+# KWin compositor defaults — the smoothness layer.
+# Blur + subtle animations + adaptive sync for a polished, fluid feel.
+
+[Compositing]
+Enabled=true
+AnimationSpeed=3
+Backend=OpenGL
+GLCore=true
+WindowsBlockCompositing=true
+
+[Plugins]
+blurEnabled=true
+contrastEnabled=true
+slideEnabled=true
+fadeEnabled=true
+# No gimmicks (wobbly windows etc.) — keep it clean and fast.
+wobblywindowsEnabled=false
+
+[Effect-blur]
+BlurStrength=8
+NoiseStrength=2
+
+[Windows]
+# Snap/tiling helpers users expect.
+ElectricBorderMaximize=true
+ElectricBorderTiling=true

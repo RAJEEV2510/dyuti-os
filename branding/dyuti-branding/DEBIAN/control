@@ -1,0 +1,11 @@
+Package: dyuti-branding
+Version: 0.1
+Architecture: all
+Maintainer: Dyuti Project <hello@example.in>
+Section: misc
+Priority: optional
+Depends: plasma-workspace
+Description: Dyuti OS branding and desktop defaults
+ Default wallpaper, Plasma look-and-feel defaults, color scheme, and system
+ identity files (os-release, issue) for Dyuti OS. The os-release file is
+ templated at build time from build/config.sh.

@@ -1,0 +1,15 @@
+# Build working tree and outputs
+build/work/
+dist/
+*.iso
+*.squashfs
+*.log
+
+# Built packages
+*.deb
+!branding/**/*.deb
+
+# Editor / OS cruft
+.DS_Store
+Thumbs.db
+*.swp

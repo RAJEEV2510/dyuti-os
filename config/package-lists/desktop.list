@@ -1,0 +1,22 @@
+# KDE Plasma desktop — the rendering engine we reshape into our own look.
+# Kept lean for the alpha (plasma-desktop, not the full kde-full metapackage).
+
+plasma-desktop
+plasma-workspace
+plasma-nm
+plasma-pa
+sddm
+kde-config-sddm
+systemsettings
+dolphin
+konsole
+kwin-x11
+kwin-wayland
+plasma-systemmonitor
+kscreen
+breeze
+breeze-gtk
+powerdevil
+bluedevil
+plasma-discover
+xserver-xorg

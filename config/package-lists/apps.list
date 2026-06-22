@@ -1,0 +1,46 @@
+# Curated default applications for everyday Indian users.
+# Generous but opinionated — useful out of the box, no duplicates, no junk.
+
+# ---- Office & documents ------------------------------------------------------
+libreoffice-writer
+libreoffice-calc
+libreoffice-impress
+libreoffice-kf5            # native KDE/Plasma integration for LibreOffice
+libreoffice-style-breeze  # matching icons
+okular                    # PDF / document viewer
+kate                      # advanced text editor
+
+# ---- Web & communication -----------------------------------------------------
+firefox
+thunderbird               # email + calendar
+transmission-qt           # torrents (legit downloads, ISOs, etc.)
+
+# ---- Media (plays everything once codecs are in) -----------------------------
+vlc
+mpv
+elisa                     # music player
+gwenview                  # image viewer
+spectacle                 # screenshots
+ffmpegthumbs              # video thumbnails in the file manager
+
+# ---- Graphics & creativity ---------------------------------------------------
+gimp                      # photo / image editing
+inkscape                  # vector graphics
+
+# ---- System & utilities ------------------------------------------------------
+ark                       # archive manager
+p7zip-full
+unrar                     # (multiverse) RAR support in Ark
+kcalc
+filelight                 # disk usage, visual
+partitionmanager          # disks
+kfind
+kget                      # download manager
+timeshift                 # system snapshots / restore — big safety win for users
+gnome-disk-utility        # friendly disk tool
+fonts-liberation2         # metric-compatible MS-font replacements (docs look right)
+
+# ---- Printing & networking ---------------------------------------------------
+cups
+system-config-printer
+network-manager-openvpn

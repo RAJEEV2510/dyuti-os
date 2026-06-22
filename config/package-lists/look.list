@@ -1,0 +1,26 @@
+# GUI polish layer — what makes it look premium rather than "stock Linux".
+# Applied alongside the desktop in chroot/install-desktop.sh.
+
+# ---- Icon & cursor themes ----------------------------------------------------
+papirus-icon-theme        # crisp, modern, widely loved icon set
+breeze-cursor-theme
+
+# ---- Theming engines ---------------------------------------------------------
+qt5-style-kvantum          # advanced Qt theming (gradients, blur, rounded)
+qt5-style-kvantum-themes
+plasma-workspace-wallpapers
+
+# ---- Fonts (UI + mono + reading) ---------------------------------------------
+fonts-cantarell
+fonts-firacode             # nice monospace for terminal/code
+fonts-roboto               # clean UI fallback
+fonts-noto-extra           # broad script coverage
+
+# ---- Boot splash (branded later via the branding package) --------------------
+plymouth
+plymouth-themes
+plymouth-label
+
+# ---- Display / smoothness helpers --------------------------------------------
+plasma-thunderbolt
+xdg-desktop-portal-kde      # consistent file dialogs / sandboxed app integration
