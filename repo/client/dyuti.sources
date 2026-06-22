@@ -1,0 +1,9 @@
+# Dyuti OS update source (deb822 format). Installed to
+# /etc/apt/sources.list.d/dyuti.sources by the dyuti-archive-keyring package.
+# The URI is templated from REPO_PUBLIC_URL by build-keyring-deb.sh.
+Types: deb
+URIs: __REPO_PUBLIC_URL__
+Suites: stable
+Components: main
+Architectures: amd64
+Signed-By: /usr/share/keyrings/dyuti-archive-keyring.gpg
