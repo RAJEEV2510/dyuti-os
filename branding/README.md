@@ -9,7 +9,7 @@ the chroot by `build/stages/40-branding.sh` using `dpkg-deb --build`.
 |---|---|
 | `usr/share/backgrounds/dyuti/dyuti-default.svg` | Default wallpaper (placeholder — replace with designer art) |
 | `etc/skel/.config/plasma-org.kde.plasma.desktop-appletsrc` | Sets the default wallpaper for new users |
-| `etc/skel/.config/kdeglobals` | Default color scheme / icon theme (Breeze for now) |
+| `etc/skel/.config/kdeglobals` | Default color scheme / icon theme (default style for now) |
 | `usr/share/dyuti/issue` | Branded console login banner |
 | `usr/lib/os-release` | **Generated at build time** from `build/config.sh` — do not edit by hand |
 | `DEBIAN/control`, `DEBIAN/postinst` | Package metadata + post-install (font cache, issue) |
@@ -17,9 +17,9 @@ the chroot by `build/stages/40-branding.sh` using `dpkg-deb --build`.
 ## Where the real polish goes (Month 2)
 
 - Replace `dyuti-default.svg` with the designer's wallpaper set.
-- Add a custom Plasma **global theme** under `usr/share/plasma/look-and-feel/`
+- Add a custom **global theme** under `usr/share/plasma/look-and-feel/`
   and point `kdeglobals` `LookAndFeelPackage` at it.
-- Add an icon theme + Plasma color scheme that match the design system.
+- Add an icon theme + color scheme that match the design system.
 - Add Calamares branding (logo, slideshow) under `etc/calamares/branding/`.
 
 ## Editing safely
