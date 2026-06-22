@@ -1,0 +1,13 @@
+#!/bin/sh
+# Undo the os-release diversion when the branding package is removed/purged.
+set -e
+
+case "$1" in
+  remove|purge)
+    rm -f /usr/lib/os-release
+    dpkg-divert --package dyuti-branding --remove --rename \
+      --divert /usr/lib/os-release.orig /usr/lib/os-release
+    ;;
+esac
+
+exit 0

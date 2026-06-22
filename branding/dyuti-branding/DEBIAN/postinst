@@ -4,6 +4,11 @@ set -e
 
 case "$1" in
   configure)
+    # Point /usr/lib/os-release (diverted away in preinst) at our branded copy.
+    if [ -f /usr/lib/os-release.dyuti ]; then
+      ln -sf os-release.dyuti /usr/lib/os-release
+    fi
+
     # Refresh font cache so any shipped fonts register.
     if command -v fc-cache >/dev/null 2>&1; then
       fc-cache -f >/dev/null 2>&1 || true

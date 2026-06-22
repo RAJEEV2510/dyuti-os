@@ -1,0 +1,13 @@
+#!/bin/sh
+# Take over /usr/lib/os-release (owned by base-files) via dpkg-divert, so our
+# branded copy can replace it cleanly and survive base-files upgrades.
+set -e
+
+case "$1" in
+  install|upgrade)
+    dpkg-divert --package dyuti-branding --add --rename \
+      --divert /usr/lib/os-release.orig /usr/lib/os-release
+    ;;
+esac
+
+exit 0

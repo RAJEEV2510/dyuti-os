@@ -15,16 +15,20 @@ PKG_SRC="${BRANDING_DIR}/${DISTRO_ID}-branding"
 [[ -d "${PKG_SRC}/DEBIAN" ]] || die "branding package source missing: ${PKG_SRC}"
 
 # Ensure maintainer scripts and shipped executables are +x (Windows checkouts
-# lose the bit; dpkg needs postinst executable and /usr/bin tools runnable).
-chmod 0755 "${PKG_SRC}/DEBIAN/postinst" 2>/dev/null || true
+# lose the bit; dpkg needs maintainer scripts executable and tools runnable).
+for s in preinst postinst postrm; do
+  [[ -f "${PKG_SRC}/DEBIAN/${s}" ]] && chmod 0755 "${PKG_SRC}/DEBIAN/${s}" || true
+done
 if [[ -d "${PKG_SRC}/usr/bin" ]]; then
   chmod 0755 "${PKG_SRC}/usr/bin/"* 2>/dev/null || true
 fi
 
-# Template the os-release with the current brand/version before packaging.
-log "templating os-release"
+# Template our os-release under a NON-conflicting name. /usr/lib/os-release is
+# owned by base-files, so we cannot ship that path directly (dpkg refuses). The
+# package's preinst dpkg-diverts it and the postinst symlinks ours in.
+log "templating os-release (os-release.dyuti)"
 mkdir -p "${PKG_SRC}/usr/lib"
-cat > "${PKG_SRC}/usr/lib/os-release" <<EOF
+cat > "${PKG_SRC}/usr/lib/os-release.dyuti" <<EOF
 PRETTY_NAME="${DISTRO_NAME} ${DISTRO_VERSION}"
 NAME="${DISTRO_NAME}"
 VERSION_ID="${DISTRO_VERSION}"
@@ -52,7 +56,11 @@ trap 'umount_chroot "${CHROOT_DIR}"' EXIT
 cp "${DEB_OUT}" "${CHROOT_DIR}/tmp/"
 log "installing branding package inside chroot"
 chroot_exec "${CHROOT_DIR}" apt-get install -y "/tmp/$(basename "${DEB_OUT}")"
-# os-release lives in /usr/lib; make sure /etc/os-release points at it.
-chroot_exec "${CHROOT_DIR}" ln -sf ../usr/lib/os-release /etc/os-release
+# /etc/os-release is a base-files symlink to ../usr/lib/os-release, which our
+# preinst diverts and postinst repoints to os-release.dyuti — nothing more to do.
+
+# Verify the rebrand actually took effect inside the chroot.
+log "verifying os-release"
+chroot_exec "${CHROOT_DIR}" head -3 /usr/lib/os-release || warn "could not read os-release"
 
 ok "branding applied"
