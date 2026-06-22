@@ -20,7 +20,7 @@ log "debootstrap ${BASE_SUITE} (${ARCH}) from ${BASE_MIRROR}"
 debootstrap \
   --arch="${ARCH}" \
   --variant=minbase \
-  --components="${BASE_COMPONENTS//,/ }" \
+  --components="${BASE_COMPONENTS}" \
   --include=ca-certificates,gnupg,locales,apt-utils \
   "${BASE_SUITE}" \
   "${CHROOT_DIR}" \
