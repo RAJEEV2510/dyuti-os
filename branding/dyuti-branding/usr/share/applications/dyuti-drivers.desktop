@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Name=Dyuti Drivers
+GenericName=Driver Manager
+Comment=Detect and install recommended hardware drivers
+Exec=dyuti-drivers
+Icon=hwinfo
+Terminal=false
+Categories=Settings;HardwareSettings;Qt;KDE;
+Keywords=driver;drivers;nvidia;gpu;graphics;wifi;hardware;

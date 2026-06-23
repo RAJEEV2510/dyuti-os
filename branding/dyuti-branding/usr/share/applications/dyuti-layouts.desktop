@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Name=Dyuti Layouts
+GenericName=Desktop Layout Switcher
+Comment=Switch your desktop layout — Windows, classic, or macOS style
+Exec=dyuti-layouts
+Icon=preferences-desktop-theme
+Terminal=false
+Categories=Settings;DesktopSettings;Qt;KDE;
+Keywords=layout;panel;taskbar;appearance;windows;macos;theme;

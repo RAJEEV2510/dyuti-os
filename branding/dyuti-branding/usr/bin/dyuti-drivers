@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+# Dyuti Drivers — detect and install recommended proprietary drivers in one step.
+# A friendly front-end to ubuntu-drivers (Zorin/Mint-style driver manager).
+set -euo pipefail
+
+if ! command -v ubuntu-drivers >/dev/null 2>&1; then
+  kdialog --error "The driver tool is not available on this system." 2>/dev/null || \
+    echo "ubuntu-drivers not found" >&2
+  exit 1
+fi
+
+devices="$(ubuntu-drivers devices 2>/dev/null || true)"
+[ -n "${devices}" ] || devices="No devices needing proprietary drivers were detected."
+
+if ! kdialog --title "Dyuti Drivers" \
+     --yesno "Detected hardware:\n\n${devices}\n\nInstall the recommended drivers now?"; then
+  exit 0
+fi
+
+# Run the install in a terminal so the user can see progress; pkexec for rights.
+konsole -e bash -c '
+  echo "Installing recommended drivers..."
+  echo
+  pkexec ubuntu-drivers install
+  echo
+  echo "Done. Reboot to finish applying the drivers."
+  read -r -p "Press Enter to close this window. "
+'

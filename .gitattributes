@@ -11,3 +11,9 @@ rules       text eol=lf
 changelog   text eol=lf
 *.list      text eol=lf
 *.cfg       text eol=lf
+*.js        text eol=lf
+*.qml       text eol=lf
+*.desktop   text eol=lf
+
+# Extensionless executables shipped in the branding package (Plasma tools).
+branding/dyuti-branding/usr/bin/* text eol=lf

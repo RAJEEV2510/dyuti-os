@@ -23,6 +23,10 @@ theme=Breeze
 defaultWallpaperTheme=dyuti
 Image=/usr/share/backgrounds/dyuti/dyuti-default.svg
 
+; Lock screen uses the calmer, darker dawn so the unlock prompt stays readable.
+[kscreenlockerrc][Greeter][Wallpaper][org.kde.image][General]
+Image=/usr/share/backgrounds/dyuti/dyuti-lockscreen.svg
+
 [ksplashrc][KSplash]
 Theme=in.dyuti.lookandfeel
 Engine=KSplashQML

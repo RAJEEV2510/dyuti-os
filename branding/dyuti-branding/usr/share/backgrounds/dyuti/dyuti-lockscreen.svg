@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Dyuti lock / login wallpaper.
+     A calmer, darker take on the dawn so the login form stays readable. Used by
+     the SDDM login theme and the Plasma lock screen. -->
+<svg xmlns="http://www.w3.org/2000/svg" width="3840" height="2160"
+     viewBox="0 0 3840 2160" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <radialGradient id="sky" cx="50%" cy="100%" r="105%">
+      <stop offset="0%"   stop-color="#ff9d4d" stop-opacity="0.85"/>
+      <stop offset="18%"  stop-color="#8a3b6e"/>
+      <stop offset="46%"  stop-color="#2c2160"/>
+      <stop offset="100%" stop-color="#090b22"/>
+    </radialGradient>
+    <radialGradient id="bloom" cx="50%" cy="50%" r="50%">
+      <stop offset="0%"   stop-color="#ffe7b0" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#ffe7b0" stop-opacity="0"/>
+    </radialGradient>
+    <!-- Center darkening so the login fields read clearly. -->
+    <radialGradient id="center" cx="50%" cy="46%" r="60%">
+      <stop offset="0%"   stop-color="#090b22" stop-opacity="0.55"/>
+      <stop offset="100%" stop-color="#090b22" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="soft" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="22"/>
+    </filter>
+  </defs>
+
+  <rect width="3840" height="2160" fill="url(#sky)"/>
+
+  <!-- Faint radiance rings rising from the bottom. -->
+  <g transform="translate(1920,2160)" fill="none" stroke="#ffd27a" stroke-opacity="0.06">
+    <circle r="700" stroke-width="2"/>
+    <circle r="1080" stroke-width="2"/>
+    <circle r="1480" stroke-width="2"/>
+  </g>
+
+  <circle cx="1920" cy="2160" r="540" fill="url(#bloom)" filter="url(#soft)"/>
+
+  <!-- Stars. -->
+  <g fill="#ffffff">
+    <circle cx="640"  cy="300" r="2.5" opacity="0.55"/>
+    <circle cx="1280" cy="200" r="2"   opacity="0.4"/>
+    <circle cx="2600" cy="260" r="2.5" opacity="0.5"/>
+    <circle cx="3200" cy="180" r="2"   opacity="0.4"/>
+    <circle cx="3460" cy="460" r="2"   opacity="0.35"/>
+    <circle cx="420"  cy="520" r="2"   opacity="0.35"/>
+  </g>
+
+  <rect width="3840" height="2160" fill="url(#center)"/>
+</svg>

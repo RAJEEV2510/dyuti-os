@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Dyuti light wallpaper.
+     A bright, warm daytime take on the dawn theme for users who prefer a light
+     desktop. Same radiance motif, inverted tonality. -->
+<svg xmlns="http://www.w3.org/2000/svg" width="3840" height="2160"
+     viewBox="0 0 3840 2160" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%"   stop-color="#fff3df"/>
+      <stop offset="45%"  stop-color="#ffe3bd"/>
+      <stop offset="100%" stop-color="#ffc98e"/>
+    </linearGradient>
+    <radialGradient id="bloom" cx="50%" cy="50%" r="50%">
+      <stop offset="0%"   stop-color="#ffffff" stop-opacity="0.95"/>
+      <stop offset="55%"  stop-color="#fff4d6" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#fff4d6" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="soft" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="16"/>
+    </filter>
+  </defs>
+
+  <rect width="3840" height="2160" fill="url(#sky)"/>
+
+  <!-- Sun rays in warm saffron. -->
+  <g transform="translate(1920,1900)" opacity="0.12" fill="#ff9d4d">
+    <polygon points="0,0 -100,-2300 100,-2300"/>
+    <polygon points="0,0 -100,-2300 100,-2300" transform="rotate(35)"/>
+    <polygon points="0,0 -100,-2300 100,-2300" transform="rotate(70)"/>
+    <polygon points="0,0 -100,-2300 100,-2300" transform="rotate(-35)"/>
+    <polygon points="0,0 -100,-2300 100,-2300" transform="rotate(-70)"/>
+    <polygon points="0,0 -70,-2300 70,-2300" transform="rotate(17)"/>
+    <polygon points="0,0 -70,-2300 70,-2300" transform="rotate(52)"/>
+    <polygon points="0,0 -70,-2300 70,-2300" transform="rotate(-17)"/>
+    <polygon points="0,0 -70,-2300 70,-2300" transform="rotate(-52)"/>
+  </g>
+
+  <g transform="translate(1920,1900)" fill="none" stroke="#ff9d4d" stroke-opacity="0.10">
+    <circle r="560" stroke-width="3"/>
+    <circle r="820" stroke-width="2"/>
+    <circle r="1120" stroke-width="2"/>
+  </g>
+
+  <circle cx="1920" cy="1900" r="640" fill="url(#bloom)" filter="url(#soft)"/>
+  <circle cx="1920" cy="1900" r="300" fill="#ffffff" opacity="0.85"/>
+
+  <!-- Soft horizon ridges in warm tone. -->
+  <path d="M0,2010 C 760,1920 1300,1990 1920,1935 C 2680,1870 3260,1965 3840,1915 L3840,2160 L0,2160 Z"
+        fill="#ffb877" opacity="0.7"/>
+  <path d="M0,2080 C 820,2025 1520,2090 1920,2050 C 2640,1985 3220,2075 3840,2035 L3840,2160 L0,2160 Z"
+        fill="#ff9d4d" opacity="0.85"/>
+</svg>

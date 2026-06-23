@@ -19,4 +19,13 @@ breeze-gtk
 powerdevil
 bluedevil
 plasma-discover
+plasma-discover-backend-flatpak   # Flatpak apps in the store (Zorin-style curated apps)
+plasma-discover-backend-fwupd     # firmware / BIOS updates from the store
 xserver-xorg
+
+# ---- Connectivity & "it just works" polish (Zorin parity) --------------------
+kdeconnect                # phone integration — richer, native answer to Zorin Connect
+plasma-firewall           # simple firewall GUI (Zorin ships one by default)
+plasma-browser-integration # media controls + downloads from the browser
+kdialog                   # dialogs used by the Dyuti Layouts / Drivers tools
+kde-cli-tools             # qdbus + helpers the layout switcher relies on

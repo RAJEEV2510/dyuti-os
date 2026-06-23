@@ -11,7 +11,8 @@ qt5-style-kvantum-themes
 plasma-workspace-wallpapers
 
 # ---- Fonts (UI + mono + reading) ---------------------------------------------
-fonts-cantarell
+fonts-inter                # premium UI font — Dyuti's default interface typeface
+fonts-cantarell            # guaranteed fallback if Inter is unavailable
 fonts-firacode             # nice monospace for terminal/code
 fonts-roboto               # clean UI fallback
 fonts-noto-extra           # broad script coverage

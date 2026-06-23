@@ -40,6 +40,15 @@ timeshift                 # system snapshots / restore — big safety win for us
 gnome-disk-utility        # friendly disk tool
 fonts-liberation2         # metric-compatible MS-font replacements (docs look right)
 
+# ---- Windows app support (Zorin's signature feature) -------------------------
+wine                      # run many Windows .exe apps; double-click is wired by wine
+winetricks                # helper to install Windows runtimes/fonts for Wine
+fonts-wine                # core Windows fonts Wine apps expect
+
+# ---- Drivers & firmware (one-click hardware, like Zorin) ---------------------
+ubuntu-drivers-common     # detect + install proprietary GPU/Wi-Fi drivers
+fwupd                     # firmware / BIOS updates (surfaced in Discover too)
+
 # ---- Printing & networking ---------------------------------------------------
 cups
 system-config-printer

@@ -8,11 +8,11 @@ AccentColor=255,157,77
 widgetStyle=Breeze
 shadeSortColumn=true
 # UI / reading fonts (installed via look.list)
-font=Cantarell,10,-1,5,50,0,0,0,0,0
+font=Inter,10,-1,5,50,0,0,0,0,0
 fixed=Fira Code,10,-1,5,50,0,0,0,0,0
-menuFont=Cantarell,10,-1,5,50,0,0,0,0,0
-smallestReadableFont=Cantarell,8,-1,5,50,0,0,0,0,0
-toolBarFont=Cantarell,10,-1,5,50,0,0,0,0,0
+menuFont=Inter,10,-1,5,50,0,0,0,0,0
+smallestReadableFont=Inter,8,-1,5,50,0,0,0,0,0
+toolBarFont=Inter,10,-1,5,50,0,0,0,0,0
 
 [Icons]
 Theme=Papirus-Dark
@@ -28,4 +28,4 @@ contrast=4
 ScaleFactor=1
 
 [WM]
-activeFont=Cantarell,10,-1,5,50,0,0,0,0,0
+activeFont=Inter,10,-1,5,50,0,0,0,0,0

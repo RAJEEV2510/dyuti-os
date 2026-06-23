@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+# Dyuti Layouts — switch the desktop layout (Windows / classic / macOS style).
+# This is our answer to "Zorin Appearance": one click reshapes the panels.
+# It applies a saved Plasma layout through the running plasmashell.
+set -euo pipefail
+
+DIR="/usr/share/dyuti-layouts"
+
+# Plasma 6 ships qdbus6; Plasma 5 ships qdbus. Use whichever exists.
+QDBUS="$(command -v qdbus6 || command -v qdbus || true)"
+if [ -z "${QDBUS}" ]; then
+  kdialog --error "qdbus is not available; cannot talk to Plasma." 2>/dev/null || \
+    echo "qdbus not found" >&2
+  exit 1
+fi
+
+choice="$(kdialog --title "Dyuti Layouts" \
+  --menu "Choose a desktop layout:" \
+  dyuti-modern    "Dyuti Modern — centered taskbar (default)" \
+  windows-classic "Windows Classic — Start menu, bottom-left" \
+  macos           "macOS Style — top bar + dock" 2>/dev/null)" || exit 0
+
+script="${DIR}/${choice}.js"
+if [ ! -f "${script}" ]; then
+  kdialog --error "Layout not found: ${choice}"
+  exit 1
+fi
+
+if "${QDBUS}" org.kde.plasmashell /PlasmaShell \
+     org.kde.PlasmaShell.evaluateScript "$(cat "${script}")"; then
+  kdialog --passivepopup "Applied the ${choice} layout." 4
+else
+  kdialog --error "Could not apply the layout. Is Plasma running?"
+  exit 1
+fi
