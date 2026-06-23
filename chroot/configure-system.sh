@@ -27,8 +27,20 @@ cat > /etc/sysctl.d/99-dyuti-desktop.conf <<'EOF'
 vm.swappiness=10
 EOF
 
-# Update the initramfs so casper hooks are picked up.
+# --- live boot needs the union/overlay stack in the initramfs -----------------
+# casper mounts the read-only squashfs and layers a writable overlay (/cow) on
+# top. If these modules aren't in the initramfs, the live session aborts to a
+# busybox shell with "/cow format specified as 'overlay' and no support found".
+# Force them in so the live boot always finds overlay (+ squashfs + loop).
+say "ensuring live-boot modules (overlay, squashfs, loop) are in the initramfs"
+mkdir -p /etc/initramfs-tools
+for m in overlay squashfs loop; do
+  grep -qxF "$m" /etc/initramfs-tools/modules 2>/dev/null || echo "$m" >> /etc/initramfs-tools/modules
+done
+
+# Update the initramfs so casper hooks + the modules above are picked up.
+# This is critical for a bootable live image, so let a failure stop the build.
 say "updating initramfs"
-update-initramfs -u || true
+update-initramfs -u
 
 say "system configuration finished"
