@@ -11,7 +11,9 @@ okular                    # PDF / document viewer
 kate                      # advanced text editor
 
 # ---- Web & communication -----------------------------------------------------
-firefox
+# Google Chrome (.deb) is installed from Google's apt repo in install-desktop.sh.
+# (Ubuntu's `firefox`/`chromium` packages are snap stubs that can't run in our
+# snap-less casper live image, so we deliberately don't list them here.)
 thunderbird               # email + calendar
 transmission-qt           # torrents (legit downloads, ISOs, etc.)
 
@@ -20,7 +22,7 @@ vlc
 mpv
 elisa                     # music player
 gwenview                  # image viewer
-spectacle                 # screenshots
+kde-spectacle             # screenshots (package is kde-spectacle, not spectacle)
 ffmpegthumbs              # video thumbnails in the file manager
 
 # ---- Graphics & creativity ---------------------------------------------------
@@ -28,6 +30,8 @@ gimp                      # photo / image editing
 inkscape                  # vector graphics
 
 # ---- System & utilities ------------------------------------------------------
+iputils-ping              # `ping` — the minimal base doesn't include it
+curl                      # fetch URLs from the terminal (also adds the Chrome repo)
 ark                       # archive manager
 p7zip-full
 unrar                     # (multiverse) RAR support in Ark

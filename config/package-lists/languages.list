@@ -8,9 +8,9 @@ fonts-noto-ui-core
 # Script-specific coverage for the alpha languages
 fonts-deva           # Devanagari (Hindi, Marathi, ...)
 fonts-beng           # Bengali / Assamese
-fonts-tamil          # Tamil
+fonts-lohit-taml     # Tamil (package is fonts-lohit-taml, not fonts-tamil)
 fonts-indic          # umbrella metapackage for Indic fonts
 
-# Hunspell spell-check (English India + Hindi)
+# Hunspell spell-check (no en-IN package exists; en-GB is the closest fit)
 hunspell
-hunspell-en-in
+hunspell-en-gb

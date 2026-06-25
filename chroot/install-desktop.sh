@@ -79,6 +79,28 @@ bash "${HERE}/install-languages.sh"
 say "installing Calamares installer"
 apt_install_soft calamares calamares-settings-debian || apt_install_soft calamares
 
+# --- real web browser: Google Chrome (.deb) -----------------------------------
+# Ubuntu's `firefox`/`chromium` packages are just snap stubs that can't run in
+# our snap-less casper live image. Ship Chrome from Google's own apt repo, and
+# drop the broken Firefox stub (+ snapd) so users get a browser that works.
+say "installing Google Chrome (real .deb browser)"
+apt_install_soft curl ca-certificates gnupg
+install -d -m 0755 /etc/apt/keyrings
+if curl -fsSL https://dl.google.com/linux/linux_signing_key.pub | gpg --dearmor -o /etc/apt/keyrings/google-chrome.gpg; then
+  echo "deb [arch=amd64 signed-by=/etc/apt/keyrings/google-chrome.gpg] https://dl.google.com/linux/chrome/deb/ stable main" \
+    > /etc/apt/sources.list.d/google-chrome.list
+  apt-get update
+  apt_install_soft google-chrome-stable
+else
+  say "WARN: could not fetch Google signing key — Chrome NOT installed"
+fi
+say "removing the broken Firefox snap stub and snapd"
+apt-get purge -y firefox snapd >/dev/null 2>&1 || true
+
+# --- virtual-machine guest tools (auto-resize + clipboard in VirtualBox) -------
+say "installing VirtualBox guest additions"
+apt_install_soft virtualbox-guest-utils virtualbox-guest-x11
+
 # --- system tuning ------------------------------------------------------------
 bash "${HERE}/configure-system.sh"
 

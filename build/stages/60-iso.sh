@@ -41,6 +41,10 @@ cat > "${ISO_DIR}/boot/grub/grub.cfg" <<EOF
 set default=0
 set timeout=10
 
+# Keep the firmware/EFI framebuffer resolution for the kernel (bigger console +
+# a saner default before KMS/guest-additions kick in).
+set gfxpayload=keep
+
 # Locate the live medium (works for both BIOS El Torito and UEFI standalone).
 search --no-floppy --set=root --file /casper/vmlinuz
 

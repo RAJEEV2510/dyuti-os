@@ -1,6 +1,7 @@
 # Build working tree and outputs
 build/work/
 dist/
+dist-test/
 *.iso
 *.squashfs
 *.log

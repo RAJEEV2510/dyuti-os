@@ -6,7 +6,7 @@ plasma-workspace
 plasma-nm
 plasma-pa
 sddm
-sddm-kcm
+kde-config-sddm           # SDDM settings module (package renamed from sddm-kcm)
 systemsettings
 dolphin
 konsole
@@ -15,8 +15,10 @@ kwin-wayland
 plasma-systemmonitor
 kscreen
 breeze
-breeze-gtk
+breeze-gtk-theme          # GTK theme matching Breeze (package is breeze-gtk-theme)
 powerdevil
+power-profiles-daemon     # power modes (Performance / Balanced / Power Saver) in the applet
+upower                    # battery + AC status powerdevil needs (only a Recommends — add it)
 bluedevil
 plasma-discover
 plasma-discover-backend-flatpak   # Flatpak apps in the store (Zorin-style curated apps)
