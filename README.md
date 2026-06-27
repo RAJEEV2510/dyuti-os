@@ -20,7 +20,27 @@ stable Linux base  →  reshaped desktop  →  curated apps  →  Indian languag
    →  Dyuti branding  →  graphical installer  →  hybrid BIOS+UEFI ISO
 ```
 
-The output is `dist/dyuti-<version>-amd64.iso`.
+The output is `dist/dyuti-<version>-amd64.iso`. The base is Ubuntu **24.04 LTS
+(noble)** — Plasma 5.27 / Qt5 — and the build can also run **automatically in the
+cloud** via the `build-iso.yml` GitHub Actions workflow.
+
+---
+
+## The desktop
+
+Dyuti ships its own design system, not a stock Plasma theme:
+
+- **Dyuti light theme is the default**, with a matching **dark** theme. Both are
+  custom Kvantum + Plasma color schemes (`Dyuti` / `DyutiLight`), with GTK 3/4
+  CSS so apps stay consistent. A one-click **theme toggle** (`dyuti-theme`) and a
+  first-boot theme applier (`dyuti-firstboot-theme`) keep everything in sync.
+- **Branded photo wallpapers** plus original SVG wallpapers (light, dark,
+  lockscreen, bloom, mountain), and the **Tela** icon theme.
+- **Layout switcher** (`dyuti-layouts`) to flip the panel between a modern Dyuti,
+  **macOS-style**, and **Windows-classic** layout.
+- A **driver manager** (`dyuti-drivers`) and a first-boot **Welcome** app.
+- A unified design language documented in `docs/DESIGN-SYSTEM.md` and
+  `docs/design-tokens.md` (saffron accent, light-first, ≤150 ms motion).
 
 ---
 
@@ -79,16 +99,31 @@ sudo make clean            # remove the work tree
 | `build/stages/` | The pipeline: bootstrap → configure → desktop → branding → cleanup → iso |
 | `chroot/` | Scripts that run *inside* the chroot (desktop, system, languages, rebrand) |
 | `config/package-lists/` | Package sets (desktop / apps / look / multimedia / languages) |
-| `branding/dyuti-branding/` | The Dyuti branding `.deb` (theme, wallpaper, splash, login, installer) |
+| `branding/dyuti-branding/` | The Dyuti branding `.deb` (themes, wallpapers, icons, splash, login, layouts, tools, installer) |
 | `repo/` | Signed APT repository scaffold (update/security backbone) |
-| `docs/` | Architecture, build notes, roadmap, rebranding coverage |
+| `tools/` | Helpers (e.g. `gen-kvantum-svg.py` to generate Kvantum theme assets) |
+| `wsl-*.sh` | WSL build helpers (setup, sync, resync, diagnostics) |
+| `.github/workflows/` | `build-iso.yml` — cloud CI that builds the ISO |
+| `docs/` | Architecture, build notes, roadmap, design system, rebranding, plans |
 | `dist/` | Output ISOs (git-ignored) |
+
+---
+
+## Docs
+
+- `docs/ARCHITECTURE.md`, `docs/BUILDING.md`, `docs/ROADMAP.md` — how it's built and where it's going
+- `docs/DESIGN-SYSTEM.md`, `docs/design-tokens.md` — the design language
+- `docs/REBRANDING.md` — how upstream marks are stripped/replaced
+- `docs/KNOWN-ISSUES.md` — current rough edges
+- `docs/PLAN-*.md` — in-progress plans (panel, task manager, theme unification, beating Zorin/BOSS)
 
 ---
 
 ## Status
 
-`v0.1-alpha` — first bootable, fully-branded ISO. See `docs/ROADMAP.md`.
+`v0.1-alpha` (codename *prabha*) — bootable, fully-branded ISO with a custom
+light/dark design system, layout switcher, and cloud CI. See `docs/ROADMAP.md`
+and `docs/KNOWN-ISSUES.md`.
 
 ## Licensing note
 
