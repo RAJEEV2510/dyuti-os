@@ -27,3 +27,6 @@ plymouth-label
 # ---- Display / smoothness helpers --------------------------------------------
 plasma-thunderbolt
 xdg-desktop-portal-kde      # consistent file dialogs / sandboxed app integration
+
+# ---- Panel widgets -----------------------------------------------------------
+plasma-widgets-addons       # extra plasmoids incl. the weather widget (Win11-style footer)

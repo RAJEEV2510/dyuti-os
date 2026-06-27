@@ -4,11 +4,12 @@
 
 SHELL := /bin/bash
 
-.PHONY: build bootstrap configure desktop branding cleanup iso clean reallyclean help
+.PHONY: build refresh bootstrap configure desktop branding cleanup iso clean reallyclean help
 
 help:
 	@echo "Dyuti OS build targets:"
 	@echo "  make build       - run the full pipeline -> dist/*.iso"
+	@echo "  make refresh     - incremental: reuse chroot, re-brand + repack ISO"
 	@echo "  make bootstrap   - stage 10: debootstrap the base system"
 	@echo "  make configure   - stage 20: apt sources, locale, mounts"
 	@echo "  make desktop     - stage 30: KDE Plasma + apps + languages"
@@ -20,6 +21,9 @@ help:
 
 build:
 	@bash build/build.sh all
+
+refresh:
+	@bash build/build.sh refresh
 
 bootstrap:
 	@bash build/build.sh 10-bootstrap

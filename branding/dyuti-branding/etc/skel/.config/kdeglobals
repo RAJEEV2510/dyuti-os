@@ -5,7 +5,10 @@
 ColorScheme=DyutiLight
 Name=Dyuti Light
 AccentColor=255,157,77
-widgetStyle=kvantum
+# Breeze widget style: follows the DyutiLight color scheme live (no shell restart
+# needed), so windows AND menus stay light. The custom Kvantum theme rendered
+# desktop menus dark on first boot — Breeze is the reliable, consistent choice.
+widgetStyle=Breeze
 shadeSortColumn=true
 # UI / reading fonts (installed via look.list)
 font=Inter,10,-1,5,50,0,0,0,0,0
@@ -15,7 +18,7 @@ smallestReadableFont=Inter,8,-1,5,50,0,0,0,0,0
 toolBarFont=Inter,10,-1,5,50,0,0,0,0,0
 
 [Icons]
-Theme=Tela-orange
+Theme=Dyuti
 
 [KDE]
 # Double-click to open — familiar for users migrating from Windows.

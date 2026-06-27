@@ -53,16 +53,31 @@ apt_install_soft $(read_list "${LISTS}/apps.list")
 say "installing look & feel layer"
 apt_install_soft $(read_list "${LISTS}/look.list")
 
-# --- Tela icon theme (modern, simple; saffron via the 'orange' variant) -------
-# Not in the Ubuntu repos, so fetch vinceliuice's installer at build time. It
-# installs Tela-orange (light) + Tela-orange-dark (dark) into /usr/share/icons
-# pre-coloured to our saffron accent — no per-folder recolor needed. Resilient:
-# a network failure leaves Papirus (still installed) as the fallback default.
-say "installing Tela icon theme (orange)"
+# --- Dyuti icon theme (Tela 'orange' variant, rebranded) ----------------------
+# Not in the Ubuntu repos, so fetch the Tela installer at build time. It installs
+# the orange variant pre-coloured to our saffron accent (covers folders AND
+# places). The installer names the dirs after the repo/fork it was cloned from
+# (e.g. i2vsys-orange*), so we rename them to the Dyuti brand afterwards and the
+# branding configs reference 'Dyuti' / 'Dyuti-dark'. Resilient: a network failure
+# leaves Papirus (still installed) as the fallback default.
+say "installing Dyuti icon theme (Tela orange, rebranded)"
 apt_install_soft git
 if git clone --depth 1 https://github.com/vinceliuice/Tela-icon-theme /tmp/Tela 2>/dev/null; then
   ( cd /tmp/Tela && ./install.sh orange ) || say "WARN: Tela install script failed — keeping Papirus"
   rm -rf /tmp/Tela
+  # Rebrand whatever '*-orange*' theme dirs the installer produced -> Dyuti*.
+  ( cd /usr/share/icons || exit 0
+    for base in *-orange; do
+      [ -d "$base" ] || continue
+      for v in "" "-light" "-dark"; do
+        src="${base}${v}"; dst="Dyuti${v}"
+        [ -d "$src" ] || continue
+        rm -rf "$dst"; mv "$src" "$dst"
+        sed -i "s/^Name=.*/Name=Dyuti${v}/" "$dst/index.theme" 2>/dev/null || true
+        command -v gtk-update-icon-cache >/dev/null 2>&1 \
+          && gtk-update-icon-cache -qf "$dst" 2>/dev/null || true
+      done
+    done )
 else
   say "WARN: could not clone Tela-icon-theme — keeping Papirus as icon default"
 fi

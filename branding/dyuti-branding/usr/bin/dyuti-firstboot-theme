@@ -17,7 +17,7 @@ WALL=/usr/share/backgrounds/dyuti/dyuti-mountain.png
 # non-zero while the shell is unreachable, so we use it as the readiness probe.
 ready=
 i=0
-while [ "$i" -lt 30 ]; do
+while [ "$i" -lt 90 ]; do
   if plasma-apply-wallpaperimage "$WALL" >/dev/null 2>&1; then
     ready=1
     break

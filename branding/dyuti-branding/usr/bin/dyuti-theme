@@ -1,10 +1,10 @@
 #!/bin/sh
 # dyuti-theme [dark|light|toggle] — switch the Dyuti desktop between its dark and
-# light variants in one shot: Plasma color scheme, Kvantum widget theme, icon
-# set, GTK (3 + 4) app colors, and the desktop + lock-screen wallpaper.
+# light variants in one shot: Plasma color scheme (Breeze widget style follows
+# it), icon set, GTK (3 + 4) app colors, and the desktop + lock-screen wallpaper.
 #
 # Run as the logged-in user. The Plasma color scheme and wallpaper apply live
-# over D-Bus; Kvantum + GTK colors are picked up by apps as they (re)start.
+# over D-Bus; GTK colors are picked up by apps as they (re)start.
 set -eu
 
 CFG="${XDG_CONFIG_HOME:-$HOME/.config}"
@@ -23,12 +23,12 @@ fi
 
 case "$mode" in
   dark)
-    scheme=Dyuti;      kv=Dyuti;      icons=Tela-orange-dark; prefer_dark=true
+    scheme=Dyuti;      icons=Dyuti-dark; prefer_dark=true
     gtk_theme=Breeze-Dark
     wall="$WALL/dyuti-dark.png"; lock="$WALL/dyuti-dark.png"
     g3="$SHARE/gtk3-dark.css";  g4="$SHARE/gtk4-dark.css" ;;
   light)
-    scheme=DyutiLight; kv=DyutiLight; icons=Tela-orange;    prefer_dark=false
+    scheme=DyutiLight; icons=Dyuti;    prefer_dark=false
     gtk_theme=Breeze
     wall="$WALL/dyuti-mountain.png"; lock="$WALL/dyuti-mountain.png"
     g3="$SHARE/gtk3-light.css"; g4="$SHARE/gtk4-light.css" ;;
@@ -40,13 +40,11 @@ esac
 # Always write the keys to disk (deterministic default, even headless / before
 # the shell is up), THEN ask the live shell to reload them for instant effect.
 kwriteconfig5 --file kdeglobals --group General --key ColorScheme "$scheme"
-kwriteconfig5 --file kdeglobals --group KDE     --key widgetStyle kvantum
+# Breeze widget style follows the color scheme live — windows + menus stay in
+# sync, no shell restart needed (the custom Kvantum theme drew menus dark).
+kwriteconfig5 --file kdeglobals --group KDE     --key widgetStyle Breeze
 kwriteconfig5 --file kdeglobals --group Icons   --key Theme "$icons"
 plasma-apply-colorscheme "$scheme" >/dev/null 2>&1 || true
-
-# --- Kvantum widget theme (engine stays selected via widgetStyle=kvantum) ----
-mkdir -p "$CFG/Kvantum"
-kwriteconfig5 --file "$CFG/Kvantum/kvantum.kvconfig" --group General --key theme "$kv"
 
 # --- GTK 3 + 4 app colors ----------------------------------------------------
 [ -f "$g3" ] && { mkdir -p "$CFG/gtk-3.0"; cp -f "$g3" "$CFG/gtk-3.0/gtk.css"; }
@@ -61,6 +59,21 @@ for ini in "$CFG/gtk-3.0/settings.ini" "$CFG/gtk-4.0/settings.ini"; do
 done
 
 # --- Wallpaper (live shell) + lock screen ------------------------------------
+# Set the desktop wallpaper on EVERY containment by talking to the running
+# plasmashell. This evaluateScript path is far more reliable than
+# plasma-apply-wallpaperimage, which silently no-ops on some Plasma 5.27
+# containment setups (notably the casper live session) — that was why the
+# desktop kept falling back to the stock blue wallpaper.
+if command -v qdbus >/dev/null 2>&1; then
+  qdbus org.kde.plasmashell /PlasmaShell org.kde.PlasmaShell.evaluateScript "
+    var ds = desktops();
+    for (var i = 0; i < ds.length; ++i) {
+      ds[i].wallpaperPlugin = 'org.kde.image';
+      ds[i].currentConfigGroup = ['Wallpaper', 'org.kde.image', 'General'];
+      ds[i].writeConfig('Image', 'file://$wall');
+    }" >/dev/null 2>&1 || true
+fi
+# Belt-and-suspenders fallback (also seeds the on-disk config for next login).
 plasma-apply-wallpaperimage "$wall" >/dev/null 2>&1 || true
 kwriteconfig5 --file kscreenlockerrc \
   --group Greeter --group Wallpaper --group org.kde.image --group General \
@@ -68,12 +81,12 @@ kwriteconfig5 --file kscreenlockerrc \
 
 echo "Dyuti theme set to: $mode"
 echo "Color scheme + wallpaper applied live. Restart open apps (or log out/in)"
-echo "for Kvantum and GTK colours to fully take effect."
+echo "for GTK app colours to fully take effect."
 
 # Friendly desktop toast when run from the menu launcher.
 if command -v notify-send >/dev/null 2>&1; then
   notify-send -a "Dyuti Theme" -i preferences-desktop-theme-global \
     "Dyuti theme: ${mode}" \
-    "Color scheme and wallpaper applied. Restart apps to finish widget styling." \
+    "Color scheme and wallpaper applied. Restart apps to finish GTK styling." \
     >/dev/null 2>&1 || true
 fi

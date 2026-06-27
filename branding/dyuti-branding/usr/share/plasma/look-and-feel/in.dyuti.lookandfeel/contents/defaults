@@ -3,14 +3,14 @@
 
 [kdeglobals][KDE]
 LookAndFeelPackage=in.dyuti.lookandfeel
-widgetStyle=kvantum
+widgetStyle=Breeze
 
 [kdeglobals][General]
 ColorScheme=DyutiLight
 AccentColor=255,157,77
 
 [kdeglobals][Icons]
-Theme=Tela-orange
+Theme=Dyuti
 
 [plasmarc][Theme]
 name=default

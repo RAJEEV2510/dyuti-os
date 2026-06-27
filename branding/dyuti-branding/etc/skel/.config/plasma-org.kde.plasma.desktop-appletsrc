@@ -1,6 +1,7 @@
-# Default desktop + panel layout for new users.
-# A complete bottom panel (menu, task manager, tray, clock) so the desktop is
-# usable on first login. immutability=1 = Mutable, so users can still customise.
+# Default desktop + panel layout for new users — Windows 11-style footer.
+# Floating bottom panel: weather on the left, Start + task icons centred (two
+# expanding panelspacers do the centring), system tray + clock on the right.
+# immutability=1 = Mutable, so users can still customise.
 
 [Containments][1]
 activityId=
@@ -24,7 +25,8 @@ location=4
 plugin=org.kde.panel
 
 [Containments][2][General]
-AppletOrder=3;4;5;6;7;8
+# weather ; spacer ; start ; tasks ; spacer ; tray ; clock ; show-desktop
+AppletOrder=9;5;3;4;10;6;7;8
 # Floating, detached panel — the modern Plasma 5.27 premium look.
 floating=1
 
@@ -41,7 +43,10 @@ plugin=org.kde.plasma.icontasks
 
 [Containments][2][Applets][5]
 immutability=1
-plugin=org.kde.plasma.marginsseparator
+plugin=org.kde.plasma.panelspacer
+
+[Containments][2][Applets][5][Configuration][General]
+expanding=true
 
 [Containments][2][Applets][6]
 immutability=1
@@ -57,3 +62,14 @@ showDate=true
 [Containments][2][Applets][8]
 immutability=1
 plugin=org.kde.plasma.showdesktop
+
+[Containments][2][Applets][9]
+immutability=1
+plugin=org.kde.plasma.weather
+
+[Containments][2][Applets][10]
+immutability=1
+plugin=org.kde.plasma.panelspacer
+
+[Containments][2][Applets][10][Configuration][General]
+expanding=true
