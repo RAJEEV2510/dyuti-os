@@ -52,6 +52,8 @@ apt_install_soft $(read_list "${LISTS}/apps.list")
 # --- GUI polish layer: themes, fonts, icons, plymouth (soft) ------------------
 say "installing look & feel layer"
 apt_install_soft $(read_list "${LISTS}/look.list")
+# (Papirus saffron folder recolor is applied by the branding package postinst,
+# so it runs on the fast `branding` target rather than a full desktop rebuild.)
 
 # --- multimedia codecs so media just works (soft) -----------------------------
 say "installing multimedia codecs"
@@ -86,7 +88,11 @@ apt_install_soft calamares calamares-settings-debian || apt_install_soft calamar
 say "installing Google Chrome (real .deb browser)"
 apt_install_soft curl ca-certificates gnupg
 install -d -m 0755 /etc/apt/keyrings
-if curl -fsSL https://dl.google.com/linux/linux_signing_key.pub | gpg --dearmor -o /etc/apt/keyrings/google-chrome.gpg; then
+# Download to a file first, then dearmor from that file with stdin closed.
+# Piping curl into `gpg --dearmor` (which reads stdin) hangs forever in a
+# non-interactive/background build where stdin never sees EOF.
+if curl -fsSL --max-time 60 https://dl.google.com/linux/linux_signing_key.pub -o /tmp/google-key.pub \
+   && gpg --batch --yes --no-tty --dearmor -o /etc/apt/keyrings/google-chrome.gpg /tmp/google-key.pub </dev/null; then
   echo "deb [arch=amd64 signed-by=/etc/apt/keyrings/google-chrome.gpg] https://dl.google.com/linux/chrome/deb/ stable main" \
     > /etc/apt/sources.list.d/google-chrome.list
   apt-get update

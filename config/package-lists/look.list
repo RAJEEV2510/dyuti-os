@@ -6,7 +6,7 @@ papirus-icon-theme        # crisp, modern, widely loved icon set
 breeze-cursor-theme
 
 # ---- Theming engines ---------------------------------------------------------
-qt5-style-kvantum          # advanced Qt theming (gradients, blur, rounded)
+qt5-style-kvantum          # Kvantum engine (noble ships Plasma 5.27 / Qt5)
 qt5-style-kvantum-themes
 plasma-workspace-wallpapers
 

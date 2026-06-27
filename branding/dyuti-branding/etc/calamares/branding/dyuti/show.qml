@@ -1,7 +1,8 @@
 /*
  * Dyuti OS installer slideshow (Calamares Slideshow API 2).
- * Plays while the system installs. Plain, on-brand slides — the designer can
- * replace these with rich imagery later.
+ * Plays while the system installs. Premium dark, restrained accent — palette
+ * and type from design-tokens.md. The designer can replace these with rich
+ * imagery later; the structure stays on-brand.
  */
 import QtQuick 2.15
 import calamares.slideshow 1.0
@@ -9,9 +10,11 @@ import calamares.slideshow 1.0
 Presentation {
     id: presentation
 
-    property color bg:     "#14172a"
-    property color ink:    "#e8eaf4"
-    property color accent: "#ff9d4d"
+    // ---- design tokens -------------------------------------------------------
+    property color bg:     "#0d0f12"   // --dy-bg-window
+    property color ink:    "#f2f4f7"   // --dy-text-primary
+    property color sub:    "#a4adba"   // --dy-text-secondary
+    property color accent: "#ff9d4d"   // --dy-accent (restrained: rule only)
 
     function onActivate() { presentation.startTimer() }
     function onLeave()    { presentation.stopTimer() }
@@ -24,81 +27,59 @@ Presentation {
         onTriggered: presentation.goToNextSlide()
     }
 
-    Slide {
+    // ---- a reusable slide: charcoal field, ink title, saffron underline ------
+    component InfoSlide: Slide {
+        property string heading: ""
+        property string body: ""
         Rectangle {
             anchors.fill: parent
             color: presentation.bg
             Column {
                 anchors.centerIn: parent
-                spacing: 14
-                width: parent.width * 0.7
+                spacing: 20                       // --dy-space-5
+                width: parent.width * 0.66
                 Text {
-                    text: "Welcome to Dyuti OS"
+                    text: heading
+                    color: presentation.ink
+                    font.family: "Inter"
+                    font.pixelSize: 30
+                    font.weight: Font.Bold
+                    font.letterSpacing: -0.5
+                    width: parent.width
+                    horizontalAlignment: Text.AlignHCenter
+                    wrapMode: Text.WordWrap
+                }
+                Rectangle {                       // the single restrained accent
+                    width: 44; height: 3; radius: 2
                     color: presentation.accent
-                    font.pixelSize: 34; font.bold: true
                     anchors.horizontalCenter: parent.horizontalCenter
                 }
                 Text {
-                    text: "A smooth desktop, made for India."
-                    color: presentation.ink
-                    font.pixelSize: 18
+                    text: body
+                    color: presentation.sub
+                    font.family: "Inter"
+                    font.pixelSize: 17
+                    lineHeight: 1.4
+                    width: parent.width
                     horizontalAlignment: Text.AlignHCenter
-                    width: parent.width; wrapMode: Text.WordWrap
-                    anchors.horizontalCenter: parent.horizontalCenter
+                    wrapMode: Text.WordWrap
                 }
             }
         }
     }
 
-    Slide {
-        Rectangle {
-            anchors.fill: parent
-            color: presentation.bg
-            Column {
-                anchors.centerIn: parent
-                spacing: 14
-                width: parent.width * 0.7
-                Text {
-                    text: "Your languages, built in"
-                    color: presentation.accent
-                    font.pixelSize: 30; font.bold: true
-                    anchors.horizontalCenter: parent.horizontalCenter
-                }
-                Text {
-                    text: "Type and read in Hindi, Tamil, Bengali and more — no setup needed."
-                    color: presentation.ink
-                    font.pixelSize: 18
-                    horizontalAlignment: Text.AlignHCenter
-                    width: parent.width; wrapMode: Text.WordWrap
-                    anchors.horizontalCenter: parent.horizontalCenter
-                }
-            }
-        }
+    InfoSlide {
+        heading: "Welcome to Dyuti OS"
+        body: "A smooth, premium desktop — made for India."
     }
 
-    Slide {
-        Rectangle {
-            anchors.fill: parent
-            color: presentation.bg
-            Column {
-                anchors.centerIn: parent
-                spacing: 14
-                width: parent.width * 0.7
-                Text {
-                    text: "Thousands of apps, one click away"
-                    color: presentation.accent
-                    font.pixelSize: 30; font.bold: true
-                    anchors.horizontalCenter: parent.horizontalCenter
-                }
-                Text {
-                    text: "Open the App Center to install your favourite software safely — no terminal required."
-                    color: presentation.ink
-                    font.pixelSize: 18
-                    horizontalAlignment: Text.AlignHCenter
-                    width: parent.width; wrapMode: Text.WordWrap
-                    anchors.horizontalCenter: parent.horizontalCenter
-                }
-            }
-        }
+    InfoSlide {
+        heading: "Your languages, built in"
+        body: "Type and read in Hindi, Tamil, Bengali and more — no setup needed."
+    }
+
+    InfoSlide {
+        heading: "Thousands of apps, one click away"
+        body: "Open the App Center to install your favourite software safely — no terminal required."
     }
 }

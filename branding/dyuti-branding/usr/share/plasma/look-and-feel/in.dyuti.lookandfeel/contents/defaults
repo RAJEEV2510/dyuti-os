@@ -3,14 +3,14 @@
 
 [kdeglobals][KDE]
 LookAndFeelPackage=in.dyuti.lookandfeel
-widgetStyle=Breeze
+widgetStyle=kvantum
 
 [kdeglobals][General]
-ColorScheme=Dyuti
+ColorScheme=DyutiLight
 AccentColor=255,157,77
 
 [kdeglobals][Icons]
-Theme=Papirus-Dark
+Theme=Papirus
 
 [plasmarc][Theme]
 name=default
@@ -21,11 +21,11 @@ theme=Breeze
 
 [Wallpaper]
 defaultWallpaperTheme=dyuti
-Image=/usr/share/backgrounds/dyuti/dyuti-default.svg
+Image=/usr/share/backgrounds/dyuti/dyuti-light.svg
 
-; Lock screen uses the calmer, darker dawn so the unlock prompt stays readable.
+; Lock screen uses the same light "Dawn" field so unlock matches the desktop.
 [kscreenlockerrc][Greeter][Wallpaper][org.kde.image][General]
-Image=/usr/share/backgrounds/dyuti/dyuti-lockscreen.svg
+Image=/usr/share/backgrounds/dyuti/dyuti-light.svg
 
 [ksplashrc][KSplash]
 Theme=in.dyuti.lookandfeel

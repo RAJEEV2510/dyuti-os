@@ -1,29 +1,35 @@
 // Dyuti OS Plymouth boot splash (script module).
-// Deep-indigo background + a saffron ring of dots that rotates while booting.
-// If a logo.png is dropped into this folder it is shown centred (optional).
+// Premium dark, restrained accent: near-black charcoal field, a single saffron
+// spinner, optional centred logo. Colours read from design-tokens.md.
+//
+// NOTE: the design spec (§9) calls for a 1px saffron progress *hairline* rather
+// than a spinner. A real hairline needs a generated bar PNG asset; until that's
+// produced this asset-free spinner carries the same palette and restraint.
 
-// ---- background (radiance indigo) -------------------------------------------
-Window.SetBackgroundTopColor(0.078, 0.090, 0.165);     // #14172a
-Window.SetBackgroundBottomColor(0.050, 0.060, 0.110);  // darker indigo
+// ---- background: charcoal, subtle top->bottom depth ------------------------
+// top  = --dy-bg-window  #0d0f12   bottom = --dy-bg-sunken  #08090b
+Window.SetBackgroundTopColor(0.051, 0.059, 0.071);
+Window.SetBackgroundBottomColor(0.031, 0.035, 0.043);
 
 screen_w = Window.GetWidth();
 screen_h = Window.GetHeight();
 cx = screen_w / 2;
 cy = screen_h / 2;
 
-// ---- optional logo ----------------------------------------------------------
+// ---- optional logo (centred, slightly above the spinner) -------------------
 logo.image = Image("logo.png");          // null if file absent
 logo.sprite = Sprite();
 if (logo.image) {
     logo.sprite.SetImage(logo.image);
     logo.sprite.SetX(cx - logo.image.GetWidth() / 2);
-    logo.sprite.SetY(cy - logo.image.GetHeight() / 2 - 40);
+    logo.sprite.SetY(cy - logo.image.GetHeight() / 2 - 48);
     logo.sprite.SetOpacity(1);
 }
 
-// ---- spinner: a ring of dots ------------------------------------------------
+// ---- spinner: a tight saffron ring of dots ---------------------------------
+// --dy-accent #ff9d4d -> (1.0, 0.616, 0.302)
 dot_count = 12;
-radius = 42;
+radius = 26;
 for (i = 0; i < dot_count; i++) {
     dots[i].sprite = Sprite();
     dots[i].sprite.SetZ(10);
@@ -33,16 +39,15 @@ progress = 0;
 
 fun refresh() {
     progress++;
-    angle_base = progress / 6;
+    angle_base = progress / 8;                 // calmer rotation than before
     for (i = 0; i < dot_count; i++) {
         a = angle_base + (i * (2 * 3.14159265 / dot_count));
         x = cx + Math.Cos(a) * radius;
-        y = cy + 90 + Math.Sin(a) * radius;
-        // trailing fade so the ring looks like it spins
+        y = cy + 96 + Math.Sin(a) * radius;
+        // trailing fade so the leading dot reads brightest
         op = (i + 1) / dot_count;
-        // a small saffron square stands in for a dot
         if (!dots[i].image) {
-            dots[i].image = Image.Text(".", 1, 0.62, 0.30, 1, "Sans 22");
+            dots[i].image = Image.Text(".", 1.0, 0.616, 0.302, 1, "Sans 18");
         }
         dots[i].sprite.SetImage(dots[i].image);
         dots[i].sprite.SetX(x);
@@ -52,19 +57,20 @@ fun refresh() {
 }
 Plymouth.SetRefreshFunction(refresh);
 
-// ---- password prompt (for encrypted-disk boots) -----------------------------
+// ---- password prompt (encrypted-disk boots) --------------------------------
+// --dy-text-primary #f2f4f7 -> (0.949, 0.957, 0.969)
 fun display_password_callback(prompt, bullets) {
-    // keep it simple: show the prompt text near the spinner
-    p.image = Image.Text(prompt, 0.9, 0.9, 0.95, 1, "Sans 12");
+    p.image = Image.Text(prompt, 0.949, 0.957, 0.969, 1, "Sans 12");
     p.sprite = Sprite(p.image);
     p.sprite.SetX(cx - p.image.GetWidth() / 2);
     p.sprite.SetY(cy + 150);
 }
 Plymouth.SetDisplayPasswordFunction(display_password_callback);
 
-// ---- boot message -----------------------------------------------------------
+// ---- boot message ----------------------------------------------------------
+// --dy-text-secondary #a4adba -> (0.643, 0.678, 0.729)
 fun message_callback(text) {
-    msg.image = Image.Text(text, 0.7, 0.72, 0.8, 1, "Sans 10");
+    msg.image = Image.Text(text, 0.643, 0.678, 0.729, 1, "Sans 10");
     msg.sprite = Sprite(msg.image);
     msg.sprite.SetX(cx - msg.image.GetWidth() / 2);
     msg.sprite.SetY(screen_h - 60);

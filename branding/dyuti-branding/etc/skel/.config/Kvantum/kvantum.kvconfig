@@ -1,0 +1,5 @@
+# Selects the active Kvantum theme for new users. Dyuti ships its light variant
+# under /usr/share/Kvantum/DyutiLight/ (dark variant: /usr/share/Kvantum/Dyuti/).
+# Set widgetStyle=kvantum in kdeglobals to apply. Switch with `dyuti-theme`.
+[General]
+theme=DyutiLight

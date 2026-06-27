@@ -1,0 +1,40 @@
+#!/bin/sh
+# Runs once per user (first login). Force-applies the Dyuti wallpaper + lock
+# screen through the *running* Plasma shell.
+#
+# Why this exists: Plasma regenerates the desktop containment on first run and
+# does NOT reliably honour a hand-written, pre-seeded
+# plasma-org.kde.plasma.desktop-appletsrc — so our shipped Image= gets dropped
+# and the desktop falls back to the stock photo. plasma-apply-wallpaperimage
+# talks to the live shell over D-Bus, which survives that regeneration.
+MARK="${XDG_CONFIG_HOME:-$HOME/.config}/dyuti/.wallpaper-applied"
+[ -e "$MARK" ] && exit 0
+
+WALL=/usr/share/backgrounds/dyuti/dyuti-light.svg
+LOCK=/usr/share/backgrounds/dyuti/dyuti-light.svg
+
+# Retry until plasmashell is up enough to accept the wallpaper (it registers
+# its D-Bus interface a moment after login). plasma-apply-wallpaperimage exits
+# non-zero while the shell is unreachable, so we use its exit code as the probe.
+applied=
+i=0
+while [ "$i" -lt 30 ]; do
+  if plasma-apply-wallpaperimage "$WALL" >/dev/null 2>&1; then
+    applied=1
+    break
+  fi
+  sleep 1
+  i=$((i + 1))
+done
+
+# Lock screen wallpaper (read by kscreenlocker, no live shell needed).
+kwriteconfig5 --file kscreenlockerrc \
+  --group Greeter --group Wallpaper --group org.kde.image --group General \
+  --key Image "$LOCK" || true
+
+# Only mark done once the desktop wallpaper actually applied — otherwise retry
+# on the next login rather than leaving the user on the fallback photo forever.
+if [ -n "$applied" ]; then
+  mkdir -p "$(dirname "$MARK")"
+  touch "$MARK"
+fi

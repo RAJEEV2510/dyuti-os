@@ -32,9 +32,9 @@ images:
 slideshow: show.qml
 slideshowAPI: 2
 
-# Match the desktop: indigo sidebar, saffron highlights.
+# Match the desktop: charcoal sidebar, saffron only on the active step.
 style:
-    sidebarBackground:    "#1b1f34"
-    sidebarText:          "#e8eaf4"
-    sidebarTextSelect:    "#ff9d4d"
+    sidebarBackground:    "#14171c"   # --dy-surface-1
+    sidebarText:          "#a4adba"   # --dy-text-secondary (inactive steps)
+    sidebarTextSelect:    "#ff9d4d"   # --dy-accent (current step)
     sidebarTextHighlight: "#ff9d4d"

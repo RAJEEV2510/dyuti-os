@@ -2,6 +2,10 @@
 # Launch the Dyuti Welcome app with whichever Qt QML runner is present.
 QMLFILE=/usr/share/dyuti-welcome/Welcome.qml
 
+# qmlscene/qml go through the qtchooser wrapper; with no default selected it
+# fails with "could not find a Qt installation of ''". Pin Qt5 explicitly.
+export QT_SELECT=qt5
+
 if command -v qmlscene >/dev/null 2>&1; then
   exec qmlscene "$QMLFILE" "$@"
 elif command -v qml >/dev/null 2>&1; then

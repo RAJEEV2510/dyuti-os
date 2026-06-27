@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Application
+Name=Dyuti Theme: Light / Dark
+GenericName=Theme Switcher
+Comment=Toggle the Dyuti desktop between its light and dark appearance
+Exec=dyuti-theme toggle
+Icon=preferences-desktop-theme-global
+Terminal=false
+Categories=Settings;DesktopSettings;Qt;KDE;
+Keywords=theme;dark;light;appearance;wallpaper;color;dyuti;
+X-KDE-StartupNotify=false

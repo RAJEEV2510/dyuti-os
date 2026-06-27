@@ -1,52 +1,67 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Dyuti light wallpaper.
-     A bright, warm daytime take on the dawn theme for users who prefer a light
-     desktop. Same radiance motif, inverted tonality. -->
+<!-- Dyuti light wallpaper — "Dawn".
+     The matched light sibling of the charcoal default: same composition (one
+     saffron radiance low-right, "light in the dark"), inverted onto a crisp
+     neutral grey-white field. Depth is carried by soft tone and layered arcs,
+     never by heavy color — saffron stays a contained highlight, never a field.
+     Pure vector, scales crisply to any resolution.
+     Palette from design-tokens.md (light): bg #e4e8ed–#ffffff, accent #ff9d4d. -->
 <svg xmlns="http://www.w3.org/2000/svg" width="3840" height="2160"
      viewBox="0 0 3840 2160" preserveAspectRatio="xMidYMid slice">
   <defs>
-    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%"   stop-color="#fff3df"/>
-      <stop offset="45%"  stop-color="#ffe3bd"/>
-      <stop offset="100%" stop-color="#ffc98e"/>
-    </linearGradient>
-    <radialGradient id="bloom" cx="50%" cy="50%" r="50%">
-      <stop offset="0%"   stop-color="#ffffff" stop-opacity="0.95"/>
-      <stop offset="55%"  stop-color="#fff4d6" stop-opacity="0.5"/>
-      <stop offset="100%" stop-color="#fff4d6" stop-opacity="0"/>
+    <!-- Neutral field: lifts to near-white toward the lower-right radiance. -->
+    <radialGradient id="field" cx="78%" cy="84%" r="92%">
+      <stop offset="0%"   stop-color="#ffffff"/>
+      <stop offset="38%"  stop-color="#f4f6f9"/>
+      <stop offset="72%"  stop-color="#eaeef3"/>
+      <stop offset="100%" stop-color="#dfe4eb"/>
     </radialGradient>
-    <filter id="soft" x="-30%" y="-30%" width="160%" height="160%">
-      <feGaussianBlur stdDeviation="16"/>
-    </filter>
+    <!-- Cool counter-tone in the upper-left keeps the field from going flat. -->
+    <radialGradient id="cool" cx="14%" cy="12%" r="60%">
+      <stop offset="0%"   stop-color="#d7deea" stop-opacity="0.55"/>
+      <stop offset="100%" stop-color="#d7deea" stop-opacity="0"/>
+    </radialGradient>
+    <!-- The one saffron radiance — soft, contained, never fills the frame. -->
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%"   stop-color="#ff9d4d" stop-opacity="0.34"/>
+      <stop offset="34%"  stop-color="#ffb066" stop-opacity="0.12"/>
+      <stop offset="100%" stop-color="#ff9d4d" stop-opacity="0"/>
+    </radialGradient>
+    <!-- Warm wash hugging the glow, blending it into the field. -->
+    <radialGradient id="warm" cx="83%" cy="93%" r="70%">
+      <stop offset="0%"   stop-color="#ffe6cf" stop-opacity="0.5"/>
+      <stop offset="55%"  stop-color="#ffe6cf" stop-opacity="0.12"/>
+      <stop offset="100%" stop-color="#ffe6cf" stop-opacity="0"/>
+    </radialGradient>
+    <!-- Ribbon stroke gradient: neutral fading into a faint saffron catch. -->
+    <linearGradient id="ribbon" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%"   stop-color="#c2cad4" stop-opacity="0.0"/>
+      <stop offset="40%"  stop-color="#c2cad4" stop-opacity="0.55"/>
+      <stop offset="78%"  stop-color="#ffb066" stop-opacity="0.55"/>
+      <stop offset="100%" stop-color="#ff9d4d" stop-opacity="0.0"/>
+    </linearGradient>
+    <!-- Top sheen keeps panels / desktop icons readable. -->
+    <linearGradient id="sheen" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%"   stop-color="#ffffff" stop-opacity="0.55"/>
+      <stop offset="26%"  stop-color="#ffffff" stop-opacity="0.0"/>
+    </linearGradient>
   </defs>
 
-  <rect width="3840" height="2160" fill="url(#sky)"/>
+  <rect width="3840" height="2160" fill="url(#field)"/>
+  <rect width="3840" height="2160" fill="url(#cool)"/>
+  <rect width="3840" height="2160" fill="url(#warm)"/>
 
-  <!-- Sun rays in warm saffron. -->
-  <g transform="translate(1920,1900)" opacity="0.12" fill="#ff9d4d">
-    <polygon points="0,0 -100,-2300 100,-2300"/>
-    <polygon points="0,0 -100,-2300 100,-2300" transform="rotate(35)"/>
-    <polygon points="0,0 -100,-2300 100,-2300" transform="rotate(70)"/>
-    <polygon points="0,0 -100,-2300 100,-2300" transform="rotate(-35)"/>
-    <polygon points="0,0 -100,-2300 100,-2300" transform="rotate(-70)"/>
-    <polygon points="0,0 -70,-2300 70,-2300" transform="rotate(17)"/>
-    <polygon points="0,0 -70,-2300 70,-2300" transform="rotate(52)"/>
-    <polygon points="0,0 -70,-2300 70,-2300" transform="rotate(-17)"/>
-    <polygon points="0,0 -70,-2300 70,-2300" transform="rotate(-52)"/>
+  <!-- Layered flowing ribbons sweeping toward the radiance; quiet structure. -->
+  <g fill="none" stroke="url(#ribbon)">
+    <path d="M-200,1180 C 900,1020 1900,1300 4040,980"  stroke-width="3"   opacity="0.9"/>
+    <path d="M-200,1380 C 950,1250 2000,1520 4040,1200" stroke-width="2.4" opacity="0.8"/>
+    <path d="M-200,1580 C 1000,1480 2100,1740 4040,1420" stroke-width="2.4" opacity="0.7"/>
+    <path d="M-200,1780 C 1050,1700 2200,1960 4040,1640" stroke-width="2"   opacity="0.55"/>
   </g>
 
-  <g transform="translate(1920,1900)" fill="none" stroke="#ff9d4d" stroke-opacity="0.10">
-    <circle r="560" stroke-width="3"/>
-    <circle r="820" stroke-width="2"/>
-    <circle r="1120" stroke-width="2"/>
-  </g>
+  <!-- Single radiant highlight, low-right. The bright pinpoint is the "source". -->
+  <circle cx="3180" cy="2000" r="1040" fill="url(#glow)"/>
+  <circle cx="3180" cy="2000" r="5" fill="#ff9d4d" opacity="0.85"/>
 
-  <circle cx="1920" cy="1900" r="640" fill="url(#bloom)" filter="url(#soft)"/>
-  <circle cx="1920" cy="1900" r="300" fill="#ffffff" opacity="0.85"/>
-
-  <!-- Soft horizon ridges in warm tone. -->
-  <path d="M0,2010 C 760,1920 1300,1990 1920,1935 C 2680,1870 3260,1965 3840,1915 L3840,2160 L0,2160 Z"
-        fill="#ffb877" opacity="0.7"/>
-  <path d="M0,2080 C 820,2025 1520,2090 1920,2050 C 2640,1985 3220,2075 3840,2035 L3840,2160 L0,2160 Z"
-        fill="#ff9d4d" opacity="0.85"/>
+  <rect width="3840" height="2160" fill="url(#sheen)"/>
 </svg>

@@ -34,6 +34,25 @@ case "$1" in
       plymouth-set-default-theme dyuti || true
     fi
 
+    # Recolor Papirus folder icons to the Dyuti saffron accent (Papirus
+    # "orange" variant — closest ship-in-the-box match to #ff9d4d). Mirrors
+    # `papirus-folders -C orange` without the tool: re-point each base
+    # folder*.svg at its -orange sibling. No-ops if Papirus/orange are absent.
+    for THEME in /usr/share/icons/Papirus /usr/share/icons/Papirus-Dark /usr/share/icons/Papirus-Light; do
+      [ -d "$THEME" ] || continue
+      find "$THEME" -name 'folder-orange*.svg' 2>/dev/null \
+        | sed 's#/[^/]*$##' | sort -u | while read -r d; do
+          ( cd "$d" || exit 0
+            for src in folder-orange*.svg; do
+              [ -e "$src" ] || continue
+              dst=$(printf '%s' "$src" | sed 's/-orange//')
+              ln -sf "$src" "$dst"
+            done )
+        done
+      command -v gtk-update-icon-cache >/dev/null 2>&1 \
+        && gtk-update-icon-cache -q "$THEME" 2>/dev/null || true
+    done
+
     # Point Calamares at our branding without overwriting its settings.conf
     # (which another package owns). Just rewrite the `branding:` line.
     CALA=/etc/calamares/settings.conf

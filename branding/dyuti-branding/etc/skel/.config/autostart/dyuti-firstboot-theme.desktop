@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Application
+Name=Dyuti First-Boot Theme
+Comment=Force-apply the Dyuti wallpaper and lock screen on first login
+Exec=dyuti-firstboot-theme
+Icon=preferences-desktop-wallpaper
+Terminal=false
+NoDisplay=true
+X-GNOME-Autostart-enabled=true
+X-KDE-autostart-phase=1
+OnlyShowIn=KDE;

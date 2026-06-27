@@ -1,0 +1,78 @@
+#!/bin/sh
+# dyuti-theme [dark|light|toggle] — switch the Dyuti desktop between its dark and
+# light variants in one shot: Plasma color scheme, Kvantum widget theme, icon
+# set, GTK (3 + 4) app colors, and the desktop + lock-screen wallpaper.
+#
+# Run as the logged-in user. The Plasma color scheme and wallpaper apply live
+# over D-Bus; Kvantum + GTK colors are picked up by apps as they (re)start.
+set -eu
+
+CFG="${XDG_CONFIG_HOME:-$HOME/.config}"
+SHARE=/usr/share/dyuti-theme
+WALL=/usr/share/backgrounds/dyuti
+
+current_mode() {
+  s=$(kreadconfig5 --file kdeglobals --group General --key ColorScheme 2>/dev/null || true)
+  [ "$s" = "DyutiLight" ] && echo light || echo dark
+}
+
+mode="${1:-toggle}"
+if [ "$mode" = "toggle" ]; then
+  [ "$(current_mode)" = "light" ] && mode=dark || mode=light
+fi
+
+case "$mode" in
+  dark)
+    scheme=Dyuti;      kv=Dyuti;      icons=Papirus-Dark; prefer_dark=true
+    gtk_theme=Breeze-Dark
+    wall="$WALL/dyuti-default.svg"; lock="$WALL/dyuti-lockscreen.svg"
+    g3="$SHARE/gtk3-dark.css";  g4="$SHARE/gtk4-dark.css" ;;
+  light)
+    scheme=DyutiLight; kv=DyutiLight; icons=Papirus;      prefer_dark=false
+    gtk_theme=Breeze
+    wall="$WALL/dyuti-light.svg";   lock="$WALL/dyuti-light.svg"
+    g3="$SHARE/gtk3-light.css"; g4="$SHARE/gtk4-light.css" ;;
+  *)
+    echo "usage: dyuti-theme [dark|light|toggle]" >&2; exit 2 ;;
+esac
+
+# --- Plasma color scheme + icon theme ---------------------------------------
+# plasma-apply-colorscheme talks to the live shell; fall back to writing the
+# config directly so this still works headless / before the shell is up.
+plasma-apply-colorscheme "$scheme" >/dev/null 2>&1 \
+  || kwriteconfig5 --file kdeglobals --group General --key ColorScheme "$scheme"
+kwriteconfig5 --file kdeglobals --group Icons --key Theme "$icons"
+
+# --- Kvantum widget theme (engine stays selected via widgetStyle=kvantum) ----
+mkdir -p "$CFG/Kvantum"
+kwriteconfig5 --file "$CFG/Kvantum/kvantum.kvconfig" --group General --key theme "$kv"
+
+# --- GTK 3 + 4 app colors ----------------------------------------------------
+[ -f "$g3" ] && { mkdir -p "$CFG/gtk-3.0"; cp -f "$g3" "$CFG/gtk-3.0/gtk.css"; }
+[ -f "$g4" ] && { mkdir -p "$CFG/gtk-4.0"; cp -f "$g4" "$CFG/gtk-4.0/gtk.css"; }
+# Theme/icon names + dark preference for GTK + libadwaita apps that honour them.
+for ini in "$CFG/gtk-3.0/settings.ini" "$CFG/gtk-4.0/settings.ini"; do
+  mkdir -p "$(dirname "$ini")"
+  kwriteconfig5 --file "$ini" --group Settings --key gtk-theme-name "$gtk_theme"
+  kwriteconfig5 --file "$ini" --group Settings --key gtk-icon-theme-name "$icons"
+  kwriteconfig5 --file "$ini" --group Settings \
+    --key gtk-application-prefer-dark-theme "$prefer_dark"
+done
+
+# --- Wallpaper (live shell) + lock screen ------------------------------------
+plasma-apply-wallpaperimage "$wall" >/dev/null 2>&1 || true
+kwriteconfig5 --file kscreenlockerrc \
+  --group Greeter --group Wallpaper --group org.kde.image --group General \
+  --key Image "$lock" || true
+
+echo "Dyuti theme set to: $mode"
+echo "Color scheme + wallpaper applied live. Restart open apps (or log out/in)"
+echo "for Kvantum and GTK colours to fully take effect."
+
+# Friendly desktop toast when run from the menu launcher.
+if command -v notify-send >/dev/null 2>&1; then
+  notify-send -a "Dyuti Theme" -i preferences-desktop-theme-global \
+    "Dyuti theme: ${mode}" \
+    "Color scheme and wallpaper applied. Restart apps to finish widget styling." \
+    >/dev/null 2>&1 || true
+fi

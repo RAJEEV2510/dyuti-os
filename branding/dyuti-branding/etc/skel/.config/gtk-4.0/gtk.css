@@ -1,0 +1,30 @@
+/* Dyuti OS — GTK4 / libadwaita color overrides (light, shipped default).
+ * Maps the light design tokens (design-tokens.md, light theme) onto the
+ * libadwaita named colors so GTK4 apps match the Qt/Plasma desktop.
+ * Swap with `dyuti-theme dark`. */
+
+@define-color window_bg_color    #eef1f5;   /* --dy-bg-window  */
+@define-color window_fg_color    #14171c;   /* --dy-text-primary */
+@define-color view_bg_color      #ffffff;   /* --dy-surface-2 (view base) */
+@define-color view_fg_color      #14171c;
+@define-color headerbar_bg_color #ffffff;   /* --dy-surface-2 */
+@define-color headerbar_fg_color #14171c;
+@define-color card_bg_color      #f7f9fb;   /* --dy-surface-1 */
+@define-color card_fg_color      #14171c;
+@define-color popover_bg_color   #ffffff;   /* --dy-surface-3 */
+@define-color popover_fg_color   #14171c;
+@define-color dialog_bg_color    #ffffff;
+@define-color sidebar_bg_color   #f7f9fb;
+
+@define-color accent_color       #ff9d4d;   /* --dy-accent */
+@define-color accent_bg_color    #ff9d4d;
+@define-color accent_fg_color    #1a1206;   /* --dy-on-accent */
+
+@define-color borders            #dce1e8;   /* --dy-border-subtle */
+
+@define-color success_color      #1f8f5a;
+@define-color success_bg_color   #1f8f5a;
+@define-color warning_color      #b07414;
+@define-color warning_bg_color   #b07414;
+@define-color error_color        #c43c34;
+@define-color error_bg_color     #c43c34;

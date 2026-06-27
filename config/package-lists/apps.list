@@ -58,8 +58,11 @@ cups
 system-config-printer
 network-manager-openvpn
 
-# ---- Welcome app runtime (Qt QML; qmlscene comes from the dev-tools pkg) ------
-qtdeclarative5-dev-tools
+# ---- Welcome app runtime (Qt QML) --------------------------------------------
+# noble split qmlscene into its OWN package — it is NOT in qtdeclarative5-dev-tools
+# anymore (verified in VM: that package ships no qmlscene binary). Ship qmlscene
+# directly, plus the QtQuick modules the Welcome QML imports.
+qmlscene
 qml-module-qtquick-controls2
 qml-module-qtquick-layouts
 qml-module-qtquick-window2

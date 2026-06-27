@@ -55,7 +55,12 @@ trap 'umount_chroot "${CHROOT_DIR}"' EXIT
 
 cp "${DEB_OUT}" "${CHROOT_DIR}/tmp/"
 log "installing branding package inside chroot"
-chroot_exec "${CHROOT_DIR}" apt-get install -y "/tmp/$(basename "${DEB_OUT}")"
+# Use dpkg -i, not `apt-get install`: the package version is a constant (0.1),
+# so apt sees "already newest" on every rebuild and SKIPS reinstalling — the
+# old files (e.g. widgetStyle=Breeze) would survive. dpkg -i always unpacks the
+# given .deb regardless of version; apt-get -f repairs any missing deps after.
+chroot_exec "${CHROOT_DIR}" dpkg -i "/tmp/$(basename "${DEB_OUT}")" \
+  || chroot_exec "${CHROOT_DIR}" apt-get -f install -y
 # /etc/os-release is a base-files symlink to ../usr/lib/os-release, which our
 # preinst diverts and postinst repoints to os-release.dyuti — nothing more to do.
 

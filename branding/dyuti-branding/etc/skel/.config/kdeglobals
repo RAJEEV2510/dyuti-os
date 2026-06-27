@@ -2,10 +2,10 @@
 # The custom global theme (Month 2) will supersede the theme keys here.
 
 [General]
-ColorScheme=Dyuti
-Name=Dyuti
+ColorScheme=DyutiLight
+Name=Dyuti Light
 AccentColor=255,157,77
-widgetStyle=Breeze
+widgetStyle=kvantum
 shadeSortColumn=true
 # UI / reading fonts (installed via look.list)
 font=Inter,10,-1,5,50,0,0,0,0,0
@@ -15,7 +15,7 @@ smallestReadableFont=Inter,8,-1,5,50,0,0,0,0,0
 toolBarFont=Inter,10,-1,5,50,0,0,0,0,0
 
 [Icons]
-Theme=Papirus-Dark
+Theme=Papirus
 
 [KDE]
 # Double-click to open — familiar for users migrating from Windows.
@@ -23,6 +23,8 @@ SingleClick=false
 LookAndFeelPackage=in.dyuti.lookandfeel
 AnimationDurationFactor=0.875
 contrast=4
+cursorTheme=Breeze
+cursorSize=24
 
 [KScreen]
 ScaleFactor=1
