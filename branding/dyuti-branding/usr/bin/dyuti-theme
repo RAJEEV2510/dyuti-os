@@ -23,25 +23,26 @@ fi
 
 case "$mode" in
   dark)
-    scheme=Dyuti;      kv=Dyuti;      icons=Papirus-Dark; prefer_dark=true
+    scheme=Dyuti;      kv=Dyuti;      icons=Tela-orange-dark; prefer_dark=true
     gtk_theme=Breeze-Dark
-    wall="$WALL/dyuti-default.svg"; lock="$WALL/dyuti-lockscreen.svg"
+    wall="$WALL/dyuti-dark.png"; lock="$WALL/dyuti-dark.png"
     g3="$SHARE/gtk3-dark.css";  g4="$SHARE/gtk4-dark.css" ;;
   light)
-    scheme=DyutiLight; kv=DyutiLight; icons=Papirus;      prefer_dark=false
+    scheme=DyutiLight; kv=DyutiLight; icons=Tela-orange;    prefer_dark=false
     gtk_theme=Breeze
-    wall="$WALL/dyuti-light.svg";   lock="$WALL/dyuti-light.svg"
+    wall="$WALL/dyuti-mountain.png"; lock="$WALL/dyuti-mountain.png"
     g3="$SHARE/gtk3-light.css"; g4="$SHARE/gtk4-light.css" ;;
   *)
     echo "usage: dyuti-theme [dark|light|toggle]" >&2; exit 2 ;;
 esac
 
 # --- Plasma color scheme + icon theme ---------------------------------------
-# plasma-apply-colorscheme talks to the live shell; fall back to writing the
-# config directly so this still works headless / before the shell is up.
-plasma-apply-colorscheme "$scheme" >/dev/null 2>&1 \
-  || kwriteconfig5 --file kdeglobals --group General --key ColorScheme "$scheme"
-kwriteconfig5 --file kdeglobals --group Icons --key Theme "$icons"
+# Always write the keys to disk (deterministic default, even headless / before
+# the shell is up), THEN ask the live shell to reload them for instant effect.
+kwriteconfig5 --file kdeglobals --group General --key ColorScheme "$scheme"
+kwriteconfig5 --file kdeglobals --group KDE     --key widgetStyle kvantum
+kwriteconfig5 --file kdeglobals --group Icons   --key Theme "$icons"
+plasma-apply-colorscheme "$scheme" >/dev/null 2>&1 || true
 
 # --- Kvantum widget theme (engine stays selected via widgetStyle=kvantum) ----
 mkdir -p "$CFG/Kvantum"

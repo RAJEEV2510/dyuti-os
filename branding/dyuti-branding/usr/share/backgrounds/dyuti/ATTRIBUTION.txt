@@ -1,0 +1,23 @@
+Dyuti default wallpapers — attribution
+=======================================
+
+The shipped Dyuti desktop wallpapers are derived from KDE Plasma community
+wallpapers (package: plasma-workspace-wallpapers), recomposited with a small
+"Dyuti" wordmark in the lower-right corner. The underlying artwork and its
+licence are credited below; the derivative works are redistributed under the
+same terms.
+
+dyuti-mountain.png  (default desktop + lock wallpaper)
+  Base: "Altai" by Alesya Khoteeva
+  Licence: CC-BY-SA-4.0  (https://creativecommons.org/licenses/by-sa/4.0/)
+
+dyuti-dark.png  (dark-theme desktop + lock wallpaper)
+  Base: "MilkyWay" (KDE Plasma wallpaper)
+  Licence: CC-BY-SA-4.0  (https://creativecommons.org/licenses/by-sa/4.0/)
+
+Additional wallpapers available in the picker are provided unmodified by the
+plasma-workspace-wallpapers and ubuntu-wallpapers packages under their own
+licences.
+
+The abstract "Dyuti" vector wallpapers (dyuti-default.svg, dyuti-light.svg,
+dyuti-lockscreen.svg, dyuti-bloom.svg) are original Dyuti artwork.

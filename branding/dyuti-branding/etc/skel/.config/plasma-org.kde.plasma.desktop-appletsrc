@@ -12,7 +12,7 @@ plugin=org.kde.plasma.folder
 wallpaperplugin=org.kde.image
 
 [Containments][1][Wallpaper][org.kde.image][General]
-Image=file:///usr/share/backgrounds/dyuti/dyuti-light.svg
+Image=file:///usr/share/backgrounds/dyuti/dyuti-mountain.png
 SlidePaths=/usr/share/backgrounds/dyuti
 
 [Containments][2]

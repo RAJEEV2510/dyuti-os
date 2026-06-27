@@ -10,7 +10,7 @@ ColorScheme=DyutiLight
 AccentColor=255,157,77
 
 [kdeglobals][Icons]
-Theme=Papirus
+Theme=Tela-orange
 
 [plasmarc][Theme]
 name=default
@@ -21,11 +21,11 @@ theme=Breeze
 
 [Wallpaper]
 defaultWallpaperTheme=dyuti
-Image=/usr/share/backgrounds/dyuti/dyuti-light.svg
+Image=/usr/share/backgrounds/dyuti/dyuti-mountain.png
 
-; Lock screen uses the same light "Dawn" field so unlock matches the desktop.
+; Lock screen uses the same mountain default so unlock matches the desktop.
 [kscreenlockerrc][Greeter][Wallpaper][org.kde.image][General]
-Image=/usr/share/backgrounds/dyuti/dyuti-light.svg
+Image=/usr/share/backgrounds/dyuti/dyuti-mountain.png
 
 [ksplashrc][KSplash]
 Theme=in.dyuti.lookandfeel

@@ -1,67 +1,61 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Dyuti light wallpaper — "Dawn".
-     The matched light sibling of the charcoal default: same composition (one
-     saffron radiance low-right, "light in the dark"), inverted onto a crisp
-     neutral grey-white field. Depth is carried by soft tone and layered arcs,
-     never by heavy color — saffron stays a contained highlight, never a field.
+<!-- Dyuti light wallpaper — "Dawn" (premium minimal).
+     A calm, cool grey-white field carrying ONE confident saffron bloom anchored
+     in the lower-right corner, with two crisp arcs catching its light. Unlike a
+     naive inversion of the dark theme, depth here comes from a real tonal field
+     and a saturated, contained accent — not faint near-white-on-white. The
+     accent stays a contained highlight, never a wash across the frame.
      Pure vector, scales crisply to any resolution.
-     Palette from design-tokens.md (light): bg #e4e8ed–#ffffff, accent #ff9d4d. -->
+     Palette from design-tokens.md (light): bg #dde3ea–#f0f3f7, accent #ff9d4d. -->
 <svg xmlns="http://www.w3.org/2000/svg" width="3840" height="2160"
      viewBox="0 0 3840 2160" preserveAspectRatio="xMidYMid slice">
   <defs>
-    <!-- Neutral field: lifts to near-white toward the lower-right radiance. -->
-    <radialGradient id="field" cx="78%" cy="84%" r="92%">
-      <stop offset="0%"   stop-color="#ffffff"/>
-      <stop offset="38%"  stop-color="#f4f6f9"/>
-      <stop offset="72%"  stop-color="#eaeef3"/>
-      <stop offset="100%" stop-color="#dfe4eb"/>
-    </radialGradient>
-    <!-- Cool counter-tone in the upper-left keeps the field from going flat. -->
-    <radialGradient id="cool" cx="14%" cy="12%" r="60%">
-      <stop offset="0%"   stop-color="#d7deea" stop-opacity="0.55"/>
-      <stop offset="100%" stop-color="#d7deea" stop-opacity="0"/>
-    </radialGradient>
-    <!-- The one saffron radiance — soft, contained, never fills the frame. -->
-    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
-      <stop offset="0%"   stop-color="#ff9d4d" stop-opacity="0.34"/>
-      <stop offset="34%"  stop-color="#ffb066" stop-opacity="0.12"/>
-      <stop offset="100%" stop-color="#ff9d4d" stop-opacity="0"/>
-    </radialGradient>
-    <!-- Warm wash hugging the glow, blending it into the field. -->
-    <radialGradient id="warm" cx="83%" cy="93%" r="70%">
-      <stop offset="0%"   stop-color="#ffe6cf" stop-opacity="0.5"/>
-      <stop offset="55%"  stop-color="#ffe6cf" stop-opacity="0.12"/>
-      <stop offset="100%" stop-color="#ffe6cf" stop-opacity="0"/>
-    </radialGradient>
-    <!-- Ribbon stroke gradient: neutral fading into a faint saffron catch. -->
-    <linearGradient id="ribbon" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%"   stop-color="#c2cad4" stop-opacity="0.0"/>
-      <stop offset="40%"  stop-color="#c2cad4" stop-opacity="0.55"/>
-      <stop offset="78%"  stop-color="#ffb066" stop-opacity="0.55"/>
-      <stop offset="100%" stop-color="#ff9d4d" stop-opacity="0.0"/>
+    <!-- Cool grey field: a clear, gentle diagonal — lighter top-left, deeper
+         toward the lower-right so the bloom has tone to sit against. -->
+    <linearGradient id="field" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%"   stop-color="#f0f3f7"/>
+      <stop offset="48%"  stop-color="#e6ebf1"/>
+      <stop offset="100%" stop-color="#d7dde6"/>
     </linearGradient>
-    <!-- Top sheen keeps panels / desktop icons readable. -->
+    <!-- The one saffron bloom — saturated core fading out; CONTAINED, never the
+         field. Peaks high enough (0.55) to actually read on a light ground. -->
+    <radialGradient id="bloom" cx="50%" cy="50%" r="50%">
+      <stop offset="0%"   stop-color="#ff9d4d" stop-opacity="0.55"/>
+      <stop offset="30%"  stop-color="#ff9d4d" stop-opacity="0.30"/>
+      <stop offset="62%"  stop-color="#ffb066" stop-opacity="0.10"/>
+      <stop offset="100%" stop-color="#ffb066" stop-opacity="0"/>
+    </radialGradient>
+    <!-- Warm wash hugging the bloom, blending its edge softly into the grey. -->
+    <radialGradient id="warm" cx="86%" cy="94%" r="62%">
+      <stop offset="0%"   stop-color="#ffe2c4" stop-opacity="0.55"/>
+      <stop offset="55%"  stop-color="#ffe2c4" stop-opacity="0.12"/>
+      <stop offset="100%" stop-color="#ffe2c4" stop-opacity="0"/>
+    </radialGradient>
+    <!-- Crisp arc stroke: a clean saffron catch, visible but not loud. -->
+    <linearGradient id="arc" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%"   stop-color="#ff9d4d" stop-opacity="0"/>
+      <stop offset="55%"  stop-color="#ff9d4d" stop-opacity="0.45"/>
+      <stop offset="100%" stop-color="#f5871f" stop-opacity="0.55"/>
+    </linearGradient>
+    <!-- Top sheen keeps panels / desktop icons readable against the field. -->
     <linearGradient id="sheen" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%"   stop-color="#ffffff" stop-opacity="0.55"/>
-      <stop offset="26%"  stop-color="#ffffff" stop-opacity="0.0"/>
+      <stop offset="0%"   stop-color="#ffffff" stop-opacity="0.5"/>
+      <stop offset="24%"  stop-color="#ffffff" stop-opacity="0"/>
     </linearGradient>
   </defs>
 
   <rect width="3840" height="2160" fill="url(#field)"/>
-  <rect width="3840" height="2160" fill="url(#cool)"/>
   <rect width="3840" height="2160" fill="url(#warm)"/>
 
-  <!-- Layered flowing ribbons sweeping toward the radiance; quiet structure. -->
-  <g fill="none" stroke="url(#ribbon)">
-    <path d="M-200,1180 C 900,1020 1900,1300 4040,980"  stroke-width="3"   opacity="0.9"/>
-    <path d="M-200,1380 C 950,1250 2000,1520 4040,1200" stroke-width="2.4" opacity="0.8"/>
-    <path d="M-200,1580 C 1000,1480 2100,1740 4040,1420" stroke-width="2.4" opacity="0.7"/>
-    <path d="M-200,1780 C 1050,1700 2200,1960 4040,1640" stroke-width="2"   opacity="0.55"/>
+  <!-- Two crisp arcs sweeping toward the bloom — quiet structure, clearly seen. -->
+  <g fill="none" stroke="url(#arc)" stroke-linecap="round">
+    <path d="M-200,1500 C 1100,1360 2300,1620 4040,1180" stroke-width="3.5" opacity="0.95"/>
+    <path d="M-200,1760 C 1200,1660 2450,1900 4040,1480" stroke-width="2.5" opacity="0.7"/>
   </g>
 
-  <!-- Single radiant highlight, low-right. The bright pinpoint is the "source". -->
-  <circle cx="3180" cy="2000" r="1040" fill="url(#glow)"/>
-  <circle cx="3180" cy="2000" r="5" fill="#ff9d4d" opacity="0.85"/>
+  <!-- Single saffron bloom anchored low-right; the bright pinpoint is the "source". -->
+  <circle cx="3360" cy="2060" r="1180" fill="url(#bloom)"/>
+  <circle cx="3360" cy="2060" r="7" fill="#f5871f" opacity="0.9"/>
 
   <rect width="3840" height="2160" fill="url(#sheen)"/>
 </svg>

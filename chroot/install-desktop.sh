@@ -52,8 +52,20 @@ apt_install_soft $(read_list "${LISTS}/apps.list")
 # --- GUI polish layer: themes, fonts, icons, plymouth (soft) ------------------
 say "installing look & feel layer"
 apt_install_soft $(read_list "${LISTS}/look.list")
-# (Papirus saffron folder recolor is applied by the branding package postinst,
-# so it runs on the fast `branding` target rather than a full desktop rebuild.)
+
+# --- Tela icon theme (modern, simple; saffron via the 'orange' variant) -------
+# Not in the Ubuntu repos, so fetch vinceliuice's installer at build time. It
+# installs Tela-orange (light) + Tela-orange-dark (dark) into /usr/share/icons
+# pre-coloured to our saffron accent — no per-folder recolor needed. Resilient:
+# a network failure leaves Papirus (still installed) as the fallback default.
+say "installing Tela icon theme (orange)"
+apt_install_soft git
+if git clone --depth 1 https://github.com/vinceliuice/Tela-icon-theme /tmp/Tela 2>/dev/null; then
+  ( cd /tmp/Tela && ./install.sh orange ) || say "WARN: Tela install script failed — keeping Papirus"
+  rm -rf /tmp/Tela
+else
+  say "WARN: could not clone Tela-icon-theme — keeping Papirus as icon default"
+fi
 
 # --- multimedia codecs so media just works (soft) -----------------------------
 say "installing multimedia codecs"

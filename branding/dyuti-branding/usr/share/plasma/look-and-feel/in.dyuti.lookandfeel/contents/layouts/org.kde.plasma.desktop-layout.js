@@ -9,7 +9,7 @@ for (var i = 0; i < desktopsList.length; i++) {
     var desktop = desktopsList[i];
     desktop.wallpaperPlugin = "org.kde.image";
     desktop.currentConfigGroup = ["Wallpaper", "org.kde.image", "General"];
-    desktop.writeConfig("Image", "file:///usr/share/backgrounds/dyuti/dyuti-default.svg");
+    desktop.writeConfig("Image", "file:///usr/share/backgrounds/dyuti/dyuti-mountain.png");
 }
 
 var panel = new Panel;

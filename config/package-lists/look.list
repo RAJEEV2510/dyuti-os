@@ -2,13 +2,15 @@
 # Applied alongside the desktop in chroot/install-desktop.sh.
 
 # ---- Icon & cursor themes ----------------------------------------------------
-papirus-icon-theme        # crisp, modern, widely loved icon set
+papirus-icon-theme        # fallback icon set (primary is Tela-orange, installed
+                          # from source in install-desktop.sh — modern + simple)
 breeze-cursor-theme
 
 # ---- Theming engines ---------------------------------------------------------
 qt5-style-kvantum          # Kvantum engine (noble ships Plasma 5.27 / Qt5)
 qt5-style-kvantum-themes
-plasma-workspace-wallpapers
+plasma-workspace-wallpapers     # KDE photo/abstract wallpaper collection (picker)
+ubuntu-wallpapers              # extra nature/abstract wallpapers for the picker
 
 # ---- Fonts (UI + mono + reading) ---------------------------------------------
 fonts-inter                # premium UI font — Dyuti's default interface typeface

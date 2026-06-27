@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Dyuti "Bloom" wallpaper — an organic folded-ribbon bloom in charcoal +
+     saffron, designed on the principles behind premium OS hero wallpapers:
+       * an abstract bloom that reads as folded fabric/petals with real depth
+         (each petal lit on one edge, shaded to nothing on the other), not a
+         flat symmetric starburst;
+       * the form sits OFF-CENTRE to the right with generous negative space on
+         the left, so desktop icons and windows have a calm, uncluttered field
+         (Windows 11 'Bloom' / Zorin restraint);
+       * vibrancy concentrated at the warm core, fading into a deep calm field.
+     Authored with blur filters → render to PNG at build time (QtSvg ignores
+     filters; rsvg-convert honours them).
+     Palette from design-tokens.md: field #08090b–#171b22, accent #ff9d4d. -->
+<svg xmlns="http://www.w3.org/2000/svg" width="3840" height="2160"
+     viewBox="0 0 3840 2160" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <!-- Deep charcoal field, lifting gently toward the off-centre bloom. -->
+    <radialGradient id="field" cx="64%" cy="52%" r="80%">
+      <stop offset="0%"   stop-color="#191e26"/>
+      <stop offset="38%"  stop-color="#10141a"/>
+      <stop offset="100%" stop-color="#08090b"/>
+    </radialGradient>
+
+    <!-- Petal shading gradients run ACROSS the petal (horizontal in local
+         space): a bright lit edge → mid saffron → transparent, so each curved
+         petal reads as a folded surface catching light. objectBoundingBox so the
+         lit edge follows each petal as it rotates into the rose. -->
+    <linearGradient id="gWarm" x1="0" y1="0.5" x2="1" y2="0.5">
+      <stop offset="0%"   stop-color="#ffe6c2" stop-opacity="0.92"/>
+      <stop offset="38%"  stop-color="#ff9d4d" stop-opacity="0.42"/>
+      <stop offset="100%" stop-color="#ff9d4d" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="gSaff" x1="0" y1="0.5" x2="1" y2="0.5">
+      <stop offset="0%"   stop-color="#ffc77f" stop-opacity="0.82"/>
+      <stop offset="42%"  stop-color="#ff8a2b" stop-opacity="0.34"/>
+      <stop offset="100%" stop-color="#ff8a2b" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="gDeep" x1="0" y1="0.5" x2="1" y2="0.5">
+      <stop offset="0%"   stop-color="#ff9d4d" stop-opacity="0.6"/>
+      <stop offset="45%"  stop-color="#c85a14" stop-opacity="0.34"/>
+      <stop offset="100%" stop-color="#7a3208" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="gGold" x1="0" y1="0.5" x2="1" y2="0.5">
+      <stop offset="0%"   stop-color="#ffdb8f" stop-opacity="0.8"/>
+      <stop offset="45%"  stop-color="#ffbe52" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#ffbe52" stop-opacity="0"/>
+    </linearGradient>
+
+    <!-- Ambient halo behind the bloom + bright warm core (the light source). -->
+    <radialGradient id="halo" cx="50%" cy="50%" r="50%">
+      <stop offset="0%"   stop-color="#ff9d4d" stop-opacity="0.22"/>
+      <stop offset="55%"  stop-color="#ff9d4d" stop-opacity="0.06"/>
+      <stop offset="100%" stop-color="#ff9d4d" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="core" cx="50%" cy="50%" r="50%">
+      <stop offset="0%"   stop-color="#fff6e8" stop-opacity="1"/>
+      <stop offset="26%"  stop-color="#ffd9a0" stop-opacity="0.7"/>
+      <stop offset="60%"  stop-color="#ff9d4d" stop-opacity="0.22"/>
+      <stop offset="100%" stop-color="#ff9d4d" stop-opacity="0"/>
+    </radialGradient>
+
+    <filter id="soft" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="20"/>
+    </filter>
+
+    <!-- Three petal sizes (base at bloom centre 2480,1080, tip reaching up). -->
+    <path id="pL" d="M2480,1080 C 2276,760 2344,300 2480,70  C 2616,300 2684,760 2480,1080 Z"/>
+    <path id="pM" d="M2480,1080 C 2316,820 2372,440 2480,250 C 2588,440 2644,820 2480,1080 Z"/>
+    <path id="pS" d="M2480,1080 C 2356,890 2400,600 2480,460 C 2560,600 2604,890 2480,1080 Z"/>
+  </defs>
+
+  <rect width="3840" height="2160" fill="url(#field)"/>
+
+  <!-- Soft ambient halo grounding the bloom in the field. -->
+  <circle cx="2480" cy="1080" r="1180" fill="url(#halo)"/>
+
+  <!-- The bloom: overlapping petals at irregular angles for an organic rose.
+       Larger/deeper petals sit behind; brighter, smaller ones layer in front. -->
+  <g filter="url(#soft)">
+    <!-- back layer: long, deep petals -->
+    <use href="#pL" fill="url(#gDeep)" transform="rotate( -8 2480 1080)"/>
+    <use href="#pL" fill="url(#gDeep)" transform="rotate( 58 2480 1080)"/>
+    <use href="#pL" fill="url(#gDeep)" transform="rotate(132 2480 1080)"/>
+    <use href="#pL" fill="url(#gDeep)" transform="rotate(206 2480 1080)"/>
+    <use href="#pL" fill="url(#gDeep)" transform="rotate(284 2480 1080)"/>
+    <!-- mid layer: saffron + gold, offset angles -->
+    <use href="#pM" fill="url(#gSaff)" transform="rotate( 22 2480 1080)"/>
+    <use href="#pM" fill="url(#gGold)" transform="rotate( 92 2480 1080)"/>
+    <use href="#pM" fill="url(#gSaff)" transform="rotate(166 2480 1080)"/>
+    <use href="#pM" fill="url(#gGold)" transform="rotate(244 2480 1080)"/>
+    <use href="#pM" fill="url(#gSaff)" transform="rotate(316 2480 1080)"/>
+    <!-- front layer: bright, short petals tightening the centre -->
+    <use href="#pS" fill="url(#gWarm)" transform="rotate(  6 2480 1080)"/>
+    <use href="#pS" fill="url(#gWarm)" transform="rotate( 74 2480 1080)"/>
+    <use href="#pS" fill="url(#gWarm)" transform="rotate(150 2480 1080)"/>
+    <use href="#pS" fill="url(#gWarm)" transform="rotate(228 2480 1080)"/>
+    <use href="#pS" fill="url(#gWarm)" transform="rotate(300 2480 1080)"/>
+  </g>
+
+  <!-- Bright warm core where the petals furl together. -->
+  <circle cx="2480" cy="1080" r="430" fill="url(#core)"/>
+</svg>
