@@ -99,7 +99,7 @@ Order to verify (highest perceived-quality first):
 
 ## Tooling / workflow gotchas (don't relearn these)
 
-- **Build:** edit on Windows `D:\projects\dyuti-os`; build in WSL at `/root/dyuti-os`. Use `tools/wsl-resync-build.sh` (file-based — never inline `$vars` through `wsl bash -lc`, they expand to empty). Invoke: `wsl -d Ubuntu-24.04 -u root -- bash -lc 'sed "s/\r//" /mnt/d/projects/dyuti-os/tools/wsl-resync-build.sh > /tmp/rb.sh && bash /tmp/rb.sh <targets>'`. Targets default to `desktop branding cleanup iso`; pass `branding cleanup iso` to skip desktop.
+- **Build:** edit on Windows `D:\selfProjects\dyuti-os`; build in WSL at `/root/dyuti-os`. Use `tools/wsl-resync-build.sh` (file-based — never inline `$vars` through `wsl bash -lc`, they expand to empty). Invoke: `wsl -d Ubuntu-24.04 -u root -- bash -lc 'sed "s/\r//" /mnt/d/selfProjects/dyuti-os/tools/wsl-resync-build.sh > /tmp/rb.sh && bash /tmp/rb.sh <targets>'`. Targets default to `desktop branding cleanup iso`; pass `branding cleanup iso` to skip desktop.
 - **Branding must reinstall:** `40-branding.sh` now uses `dpkg -i` (apt skips same-version 0.1, leaving stale files).
 - **Base is Plasma 5.27 / Qt5** (noble) → `qt5-style-kvantum` is correct; `qt6-style-kvantum` doesn't exist in noble.
 - **VM test:** `wsl --shutdown` first (free host RAM), copy ISO → `dist-test/dyuti-fixed.iso`, re-attach with `closemedium` (overwriting same path leaves a stale UUID), `startvm Dyuti`. Drive with `VBoxManage controlvm Dyuti keyboardputstring/keyboardputscancode` + `screenshotpng`. KRunner = Alt+F2 (`38 3c bc b8`), Enter = `1c 9c`. **Don't Alt+F4 on the bare desktop** — it triggers leave/logout and powered the VM off once.

@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+  <!-- Dyuti Task View glyph: two overlapping windows (a task switcher).
+       Custom SVG so the icon theme can't restyle it into a generic glyph. -->
+  <!-- back window: outline -->
+  <rect x="3" y="4.5" width="13" height="11" rx="2.4"
+        fill="none" stroke="#39414a" stroke-width="1.8"/>
+  <!-- front window: filled, with a saffron title bar for brand pop -->
+  <rect x="8" y="8.5" width="13" height="11" rx="2.4" fill="#39414a"/>
+  <rect x="8" y="8.5" width="13" height="3.4" rx="2.4" fill="#ff9d4d"/>
+  <rect x="8" y="10.2" width="13" height="1.7" fill="#ff9d4d"/>
+</svg>

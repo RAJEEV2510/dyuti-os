@@ -13,18 +13,19 @@ shadeSortColumn=true
 # UI / reading fonts (installed via look.list)
 font=Inter,10,-1,5,50,0,0,0,0,0
 fixed=Fira Code,10,-1,5,50,0,0,0,0,0
-menuFont=Inter,10,-1,5,50,0,0,0,0,0
+menuFont=Inter,9,-1,5,50,0,0,0,0,0
 smallestReadableFont=Inter,8,-1,5,50,0,0,0,0,0
 toolBarFont=Inter,10,-1,5,50,0,0,0,0,0
 
 [Icons]
-Theme=Dyuti
+Theme=Papirus
 
 [KDE]
 # Double-click to open — familiar for users migrating from Windows.
 SingleClick=false
 LookAndFeelPackage=in.dyuti.lookandfeel
-AnimationDurationFactor=0.875
+# Reduced from 0.875 -> 0.5: snappier, lighter feel (DESIGN-SYSTEM motion cap).
+AnimationDurationFactor=0.5
 contrast=4
 cursorTheme=Breeze
 cursorSize=24

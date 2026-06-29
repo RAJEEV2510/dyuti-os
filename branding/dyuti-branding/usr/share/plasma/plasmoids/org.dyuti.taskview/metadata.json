@@ -1,0 +1,23 @@
+{
+    "KPackageStructure": "Plasma/Applet",
+    "KPlugin": {
+        "Authors": [
+            {
+                "Email": "",
+                "Name": "Dyuti OS"
+            }
+        ],
+        "Category": "Windows and Tasks",
+        "Description": "Task View button — opens the full-screen desktop Overview (switch desktops, add a new one, see all windows).",
+        "EnabledByDefault": true,
+        "Icon": "window-duplicate",
+        "Id": "org.dyuti.taskview",
+        "Name": "Dyuti Task View",
+        "ServiceTypes": [
+            "Plasma/Applet"
+        ],
+        "Version": "1.0"
+    },
+    "X-Plasma-API": "declarativeappletscript",
+    "X-Plasma-MainScript": "ui/main.qml"
+}

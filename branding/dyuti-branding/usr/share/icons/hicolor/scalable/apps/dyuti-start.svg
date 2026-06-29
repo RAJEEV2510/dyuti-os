@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Dyuti start button: an ORIGINAL mark — a rounded app-tile with a "D"
+     monogram (D for Dyuti), drawn as plain geometry (no copied logo / no font
+     outline). Deliberately unlike any existing OS logo. Used as the panel
+     launcher icon (set by dyuti-panel-setup); separate from dyuti-logo so the
+     brand sun mark stays untouched for About/branding. -->
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256">
+  <defs>
+    <linearGradient id="dyuti-start-g" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%"   stop-color="#3aa0ff"/>
+      <stop offset="100%" stop-color="#2466cc"/>
+    </linearGradient>
+  </defs>
+  <!-- app tile -->
+  <rect x="24" y="24" width="208" height="208" rx="48" fill="url(#dyuti-start-g)"/>
+  <!-- "D" monogram, white, with the counter cut out (evenodd) -->
+  <path fill="#ffffff" fill-rule="evenodd"
+        d="M84 78 L138 78 C175 78 192 105 192 128 C192 151 175 178 138 178 L84 178 Z
+           M110 102 L136 102 C156 102 166 114 166 128 C166 142 156 154 136 154 L110 154 Z"/>
+</svg>

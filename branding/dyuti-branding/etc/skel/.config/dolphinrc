@@ -1,0 +1,5 @@
+# Dyuti Dolphin defaults.
+# Hide the "+" selection-toggle that appears when hovering files/folders — it
+# reads as clutter. Users still multi-select with Ctrl/Shift or rubber-band.
+[General]
+ShowSelectionToggle=false

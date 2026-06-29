@@ -1,4 +1,4 @@
-/* Dyuti Modern layout — a clean centered taskbar (Windows 11 feel, our identity).
+/* Dyuti Modern layout — a clean centered taskbar (modern feel, our identity).
  * Launcher + task manager are centered; system tray + clock pinned right.
  * Applied by `dyuti-layouts` via the live plasmashell scripting interface.
  */

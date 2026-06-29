@@ -23,12 +23,12 @@ fi
 
 case "$mode" in
   dark)
-    scheme=Dyuti;      icons=Dyuti-dark; prefer_dark=true
+    scheme=Dyuti;      icons=Papirus; prefer_dark=true
     gtk_theme=Breeze-Dark
     wall="$WALL/dyuti-dark.png"; lock="$WALL/dyuti-dark.png"
     g3="$SHARE/gtk3-dark.css";  g4="$SHARE/gtk4-dark.css" ;;
   light)
-    scheme=DyutiLight; icons=Dyuti;    prefer_dark=false
+    scheme=DyutiLight; icons=Papirus; prefer_dark=false
     gtk_theme=Breeze
     wall="$WALL/dyuti-mountain.png"; lock="$WALL/dyuti-mountain.png"
     g3="$SHARE/gtk3-light.css"; g4="$SHARE/gtk4-light.css" ;;
@@ -45,6 +45,19 @@ kwriteconfig5 --file kdeglobals --group General --key ColorScheme "$scheme"
 kwriteconfig5 --file kdeglobals --group KDE     --key widgetStyle Breeze
 kwriteconfig5 --file kdeglobals --group Icons   --key Theme "$icons"
 plasma-apply-colorscheme "$scheme" >/dev/null 2>&1 || true
+
+# After a LIVE colour-scheme switch, Papirus's colour-following icons (and the
+# task manager) keep their stale cached pixmaps and render as broken/orange blobs
+# until something forces a reload — that's the "icons break when I toggle back to
+# light" bug. A fresh login reads them clean; a live toggle does not. So re-apply
+# the icon theme through plasma-changeicons, which drops every running app's icon
+# cache and re-renders it against the now-current colour scheme.
+CHANGEICONS=$(command -v plasma-changeicons 2>/dev/null \
+  || ls /usr/lib/*/libexec/plasma-changeicons 2>/dev/null | head -1)
+if [ -n "$CHANGEICONS" ]; then
+  sleep 0.5                       # let the colour scheme settle in running apps
+  "$CHANGEICONS" "$icons" >/dev/null 2>&1 || true
+fi
 
 # --- GTK 3 + 4 app colors ----------------------------------------------------
 [ -f "$g3" ] && { mkdir -p "$CFG/gtk-3.0"; cp -f "$g3" "$CFG/gtk-3.0/gtk.css"; }

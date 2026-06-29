@@ -1,0 +1,89 @@
+#!/bin/sh
+# Runs once per user (first login). Rebuilds the Dyuti panel in its custom order
+# through the LIVE Plasma shell via evaluateScript — the reliable channel.
+#
+# Why this exists: seeding custom widgets / order in the skel appletsrc is NOT
+# honoured reliably (Plasma reconciles the panel on first run -> it can render
+# collapsed/invisible, "footer gone"). Adding widgets through the running shell's
+# scripting API keeps the panel full-width and working (verified live), exactly
+# like dyuti-theme applies the wallpaper. So the seeded appletsrc stays
+# stock/known-good and the custom Dyuti layout is built here.
+#
+# Method: empty the panel, then re-add every widget IN ORDER with addWidget
+# (append). addWidget is the validated-safe op; doing it in call order gives the
+# correct left->right layout WITHOUT the risky writeConfig('AppletOrder') path.
+# Every step is guarded so one bad widget can't abort the rest.
+MARK="${XDG_CONFIG_HOME:-$HOME/.config}/dyuti/.panel-setup-done"
+LOG="${XDG_CONFIG_HOME:-$HOME/.config}/dyuti/panel-setup.log"
+[ -e "$MARK" ] && exit 0
+mkdir -p "$(dirname "$LOG")"
+log() { echo "$(date '+%H:%M:%S') $*" >>"$LOG" 2>/dev/null; }
+
+# Locate the qdbus binary. Debian's package layout has moved this around
+# (qdbus-qt5 ships /usr/bin/qdbus; some images only have qdbus6). Detect rather
+# than assume — a missing binary is exactly what silently broke this before.
+QDBUS=
+for cand in qdbus qdbus-qt5 qdbus6; do
+  if command -v "$cand" >/dev/null 2>&1; then QDBUS="$cand"; break; fi
+done
+if [ -z "$QDBUS" ]; then
+  log "FATAL: no qdbus binary found (tried qdbus, qdbus-qt5, qdbus6) — panel not customized"
+  exit 0
+fi
+log "using qdbus binary: $QDBUS"
+
+# Wait until plasmashell's scripting interface answers.
+ready=
+i=0
+while [ "$i" -lt 90 ]; do
+  if "$QDBUS" org.kde.plasmashell /PlasmaShell org.kde.PlasmaShell.evaluateScript 'print(panels().length)' >/dev/null 2>&1; then
+    ready=1
+    break
+  fi
+  sleep 1
+  i=$((i + 1))
+done
+
+if [ -z "$ready" ]; then
+  log "FATAL: plasmashell scripting interface never answered after ${i}s — panel not customized"
+  exit 0
+fi
+log "plasmashell ready after ${i}s — building panel"
+
+"$QDBUS" org.kde.plasmashell /PlasmaShell org.kde.PlasmaShell.evaluateScript '
+var p = panels()[0];
+if (p) {
+  // empty the panel (collect-then-remove; removing while iterating skips items)
+  var ws = p.widgets();
+  var kill = [];
+  for (var i = 0; i < ws.length; i++) { kill.push(ws[i]); }
+  for (var j = 0; j < kill.length; j++) { try { kill[j].remove(); } catch (e) {} }
+
+  function add(t) { try { return p.addWidget(t); } catch (e) { return null; } }
+
+  // Dyuti panel order: launcher, search, task-view, apps, <spacer>, tray, clock, show-desktop
+  // (no pager — one virtual desktop by default; Task View "+" adds more)
+  var kf = add("org.kde.plasma.kickoff");
+  if (kf) { kf.currentConfigGroup = ["General"]; kf.writeConfig("icon", "dyuti-start"); }
+  add("org.dyuti.search");
+  add("org.dyuti.taskview");
+  add("org.kde.plasma.icontasks");
+  var sp = add("org.kde.plasma.panelspacer");
+  if (sp) { sp.currentConfigGroup = ["General"]; sp.writeConfig("expanding", true); }
+  add("org.kde.plasma.systemtray");
+  var clk = add("org.kde.plasma.digitalclock");
+  if (clk) {
+    clk.currentConfigGroup = ["Appearance"];
+    clk.writeConfig("showDate", true);
+    // Windows-style compact clock: stop auto-sizing the font to the panel
+    // height (which made it look big) and pin a small point size.
+    clk.writeConfig("autoFontAndSize", false);
+    clk.writeConfig("fontSize", 9);
+  }
+  add("org.kde.plasma.showdesktop");
+}
+' >>"$LOG" 2>&1
+
+log "panel build finished"
+mkdir -p "$(dirname "$MARK")"
+touch "$MARK"

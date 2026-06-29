@@ -29,11 +29,11 @@ sudo apt install -y \
 ```
 
 ## 3. Get the code onto Linux
-If the repo lives on your Windows drive, access it via `/mnt/d/projects/dyuti-os`
+If the repo lives on your Windows drive, access it via `/mnt/d/selfProjects/dyuti-os`
 from WSL — **but** building on `/mnt/...` is slow and can hit permission issues.
 Prefer copying into the Linux home:
 ```bash
-cp -r /mnt/d/projects/dyuti-os ~/dyuti-os
+cp -r /mnt/d/selfProjects/dyuti-os ~/dyuti-os
 cd ~/dyuti-os
 ```
 

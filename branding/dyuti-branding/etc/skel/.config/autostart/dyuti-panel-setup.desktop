@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Application
+Name=Dyuti Panel Setup
+Comment=Configure the Dyuti panel (inline search + Task View) on first login
+Exec=dyuti-panel-setup
+Icon=preferences-desktop-display
+Terminal=false
+NoDisplay=true
+X-GNOME-Autostart-enabled=true
+X-KDE-autostart-phase=2
+OnlyShowIn=KDE;

@@ -8,3 +8,5 @@ gstreamer1.0-plugins-ugly
 gstreamer1.0-libav
 gstreamer1.0-vaapi          # GPU-accelerated video decode where available
 libavcodec-extra            # extra audio/video codecs
+
+kamoso                      # webcam app (photos/video) — KDE-native, themed by default

@@ -8,7 +8,7 @@
 #   wsl -d Ubuntu-24.04 -u root -- bash /tmp/rb.sh
 #
 set -euo pipefail
-SRC=/mnt/d/projects/dyuti-os
+SRC=/mnt/d/selfProjects/dyuti-os
 DST=/root/dyuti-os
 
 echo "=== [1/5] sync source dirs (explicit paths; never /) ==="
@@ -37,9 +37,11 @@ done
 echo "=== [4/5] verify Kvantum files present ==="
 ls -l "$DST/branding/dyuti-branding/usr/share/Kvantum/Dyuti/"
 test -f "$DST/branding/dyuti-branding/etc/skel/.config/Kvantum/kvantum.kvconfig"
-grep -q 'widgetStyle=kvantum' "$DST/branding/dyuti-branding/etc/skel/.config/kdeglobals"
+# widgetStyle is Breeze by design (Kvantum rendered desktop menus dark on first
+# boot); just assert SOME style is pinned, not specifically kvantum.
+grep -q '^widgetStyle=' "$DST/branding/dyuti-branding/etc/skel/.config/kdeglobals"
 grep -q 'qt5-style-kvantum' "$DST/config/package-lists/look.list"
-echo "  all Kvantum files present and wired."
+echo "  all Kvantum files present and wired (style=Breeze by design)."
 
 TARGETS="${*:-desktop branding cleanup iso}"
 echo "=== [5/5] incremental build: make ${TARGETS} ==="

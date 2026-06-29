@@ -16,22 +16,33 @@ var panel = new Panel;
 panel.location = "bottom";
 panel.height = Math.round(gridUnit * 2.4);
 
-// Application launcher (full-screen menu feels modern; swap to kickoff if preferred)
-var launcher = panel.addWidget("org.kde.plasma.kickoff");
-launcher.currentConfigGroup = ["General"];
-launcher.writeConfig("icon", "dyuti-logo");
+// Keep this layout in lock-step with dyuti-panel-setup (the first-login
+// enhancement that runs when a seeded appletsrc exists). This layout.js only
+// runs when there is NO appletsrc, so it must produce the same Dyuti panel order:
+// launcher, search, task-view, pager, apps, <spacer>, tray, clock, show-desktop.
+// Custom plasmoids are guarded so one bad widget can't abort the whole layout.
+function add(t) { try { return panel.addWidget(t); } catch (e) { return null; } }
+
+// Application launcher (Kickoff with the Dyuti logo)
+var launcher = add("org.kde.plasma.kickoff");
+if (launcher) { launcher.currentConfigGroup = ["General"]; launcher.writeConfig("icon", "dyuti-logo"); }
+
+// Inline search box + Task View button (no pager — one desktop by default;
+// Task View's "+" adds more on demand)
+add("org.dyuti.search");
+add("org.dyuti.taskview");
 
 // Pinned + running apps
-panel.addWidget("org.kde.plasma.icontasks");
+add("org.kde.plasma.icontasks");
 
-// Spacer pushes the tray to the right
-panel.addWidget("org.kde.plasma.marginsseparator");
+// Expanding spacer pushes the tray to the right
+var sp = add("org.kde.plasma.panelspacer");
+if (sp) { sp.currentConfigGroup = ["General"]; sp.writeConfig("expanding", true); }
 
 // System tray + clock
-panel.addWidget("org.kde.plasma.systemtray");
-var clock = panel.addWidget("org.kde.plasma.digitalclock");
-clock.currentConfigGroup = ["Appearance"];
-clock.writeConfig("showDate", true);
+add("org.kde.plasma.systemtray");
+var clock = add("org.kde.plasma.digitalclock");
+if (clock) { clock.currentConfigGroup = ["Appearance"]; clock.writeConfig("showDate", true); }
 
 // Show-desktop pip at the very end
-panel.addWidget("org.kde.plasma.showdesktop");
+add("org.kde.plasma.showdesktop");

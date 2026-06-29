@@ -6,7 +6,7 @@
          flat symmetric starburst;
        * the form sits OFF-CENTRE to the right with generous negative space on
          the left, so desktop icons and windows have a calm, uncluttered field
-         (Windows 11 'Bloom' / Zorin restraint);
+         (a calm, restrained bloom);
        * vibrancy concentrated at the warm core, fading into a deep calm field.
      Authored with blur filters → render to PNG at build time (QtSvg ignores
      filters; rsvg-convert honours them).

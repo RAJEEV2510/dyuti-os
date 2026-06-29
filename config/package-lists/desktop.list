@@ -30,4 +30,6 @@ kdeconnect                # phone integration — richer, native answer to Zorin
 plasma-firewall           # simple firewall GUI (Zorin ships one by default)
 plasma-browser-integration # media controls + downloads from the browser
 kdialog                   # dialogs used by the Dyuti Layouts / Drivers tools
-kde-cli-tools             # qdbus + helpers the layout switcher relies on
+kde-cli-tools             # kreadconfig5/kioclient5/kstart5 — Dyuti tools rely on these
+qdbus-qt5                 # ships /usr/bin/qdbus — REQUIRED by dyuti-panel-setup (kde-cli-tools does NOT provide it)
+milou                     # ships the org.kde.milou QML module — REQUIRED by org.dyuti.search inline results

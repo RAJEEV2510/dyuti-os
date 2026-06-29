@@ -2,7 +2,7 @@
 # Sync the changed source files into the WSL clone, validate, then do an
 # INCREMENTAL rebuild (reuse the cached chroot; skip debootstrap).
 set -e
-SRC=/mnt/d/projects/dyuti-os
+SRC=/mnt/d/selfProjects/dyuti-os
 DST=/root/dyuti-os
 
 echo "=== syncing changed files ==="

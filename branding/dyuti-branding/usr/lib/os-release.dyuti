@@ -1,0 +1,12 @@
+PRETTY_NAME="Dyuti 0.1-alpha"
+NAME="Dyuti"
+VERSION_ID="0.1-alpha"
+VERSION="0.1-alpha (prabha)"
+VERSION_CODENAME=prabha
+ID=dyuti
+ID_LIKE="debian"
+HOME_URL="https://example.in"
+SUPPORT_URL="https://example.in"
+BUG_REPORT_URL="https://example.in"
+LOGO=dyuti-logo
+ANSI_COLOR="0;38;2;255;157;77"

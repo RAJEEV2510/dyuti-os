@@ -1,0 +1,23 @@
+{
+    "KPackageStructure": "Plasma/Applet",
+    "KPlugin": {
+        "Authors": [
+            {
+                "Email": "",
+                "Name": "Dyuti OS"
+            }
+        ],
+        "Category": "Utilities",
+        "Description": "Inline search box for the panel — type to search apps, files, settings and the calculator via KRunner.",
+        "EnabledByDefault": true,
+        "Icon": "search",
+        "Id": "org.dyuti.search",
+        "Name": "Dyuti Search",
+        "ServiceTypes": [
+            "Plasma/Applet"
+        ],
+        "Version": "1.0"
+    },
+    "X-Plasma-API": "declarativeappletscript",
+    "X-Plasma-MainScript": "ui/main.qml"
+}

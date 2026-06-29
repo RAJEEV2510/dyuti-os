@@ -3,7 +3,9 @@
 
 [Compositing]
 Enabled=true
-AnimationSpeed=3
+# Faster window animations (was 3) — pairs with AnimationDurationFactor=0.5 for a
+# lighter, snappier desktop.
+AnimationSpeed=2
 Backend=OpenGL
 GLCore=true
 WindowsBlockCompositing=true
@@ -24,3 +26,11 @@ NoiseStrength=2
 # Snap/tiling helpers users expect.
 ElectricBorderMaximize=true
 ElectricBorderTiling=true
+
+# Ship ONE virtual desktop by default — clean, like Windows. No pager on the
+# panel; users add more desktops on demand via the Task View "+" button.
+[Desktops]
+Number=1
+Rows=1
+Id_1=dyuti-desktop-1
+Name_1=Desktop 1
