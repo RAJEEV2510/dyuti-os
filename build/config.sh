@@ -19,9 +19,16 @@ export BASE_MIRROR="http://archive.ubuntu.com/ubuntu"
 export BASE_COMPONENTS="main,restricted,universe,multiverse"
 export ARCH="amd64"
 
-# ---- Languages shipped in the alpha (lean set; expand later) ------------------
-# Locale codes; input methods + fonts are wired in chroot/install-languages.sh
-export SHIP_LOCALES="en_IN hi_IN ta_IN bn_IN"
+# ---- Languages shipped (all 22 Eighth-Schedule languages + English India) -----
+# Locale codes; input methods (IBus + m17n) + fonts are wired in
+# chroot/install-languages.sh. Every code below has a glibc locale (verified in
+# /usr/share/i18n/SUPPORTED). Default UI stays English (India); users switch to
+# their language via System Settings → Region & Language.
+#   as=Assamese bn=Bengali brx=Bodo doi=Dogri gu=Gujarati hi=Hindi kn=Kannada
+#   ks=Kashmiri kok=Konkani mai=Maithili ml=Malayalam mni=Manipuri mr=Marathi
+#   ne=Nepali or=Odia pa=Punjabi sa=Sanskrit sat=Santali sd=Sindhi ta=Tamil
+#   te=Telugu ur=Urdu
+export SHIP_LOCALES="en_IN as_IN bn_IN brx_IN doi_IN gu_IN hi_IN kn_IN ks_IN kok_IN mai_IN ml_IN mni_IN mr_IN ne_NP or_IN pa_IN sa_IN sat_IN sd_IN ta_IN te_IN ur_IN"
 export DEFAULT_LOCALE="en_IN.UTF-8"
 
 # ---- Paths (derived; usually no need to edit) ---------------------------------

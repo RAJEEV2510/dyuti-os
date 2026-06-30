@@ -1,0 +1,16 @@
+# Breeze widget-style tweaks for Dyuti. We keep Breeze as the application style
+# (see kdeglobals widgetStyle=Breeze) but make popup MENUS translucent so KWin's
+# blur frosts them — a modern, Windows-11-"mica"-like polish on the right-click
+# context menus. Menu text stays fully opaque (only the background is see-through),
+# so readability is unaffected. NOTE: Breeze's menu *width/padding* is fixed in
+# the style and cannot be reduced from config — this file only adds the frost.
+#
+# MenuOpacity: 0 = fully transparent, 100 = opaque. 80 = a clearly visible frost
+# that stays readable. Breeze reads this key from one group depending on version;
+# we set it in both [Common] and [Style] so the frost applies regardless (the
+# unused copy is harmlessly ignored by KConfig). Pairs with kwinrc blurEnabled.
+[Common]
+MenuOpacity=80
+
+[Style]
+MenuOpacity=80

@@ -10,7 +10,7 @@ ColorScheme=DyutiLight
 AccentColor=255,157,77
 
 [kdeglobals][Icons]
-Theme=Dyuti
+Theme=Papirus
 
 [plasmarc][Theme]
 name=default

@@ -1,15 +1,24 @@
-# Indian-language fonts and support. Input methods (IBus/m17n) are installed by
-# chroot/install-languages.sh. Add more font packages here as you add locales.
+# Indian-language fonts and support for ALL 22 Eighth-Schedule languages. Input
+# methods (IBus/m17n) and locale generation are handled by
+# chroot/install-languages.sh; the shipped locale set lives in build/config.sh.
 
-# Pan-Indic Noto fonts (covers most scripts in one shot)
+# Broad Unicode coverage in one shot. fonts-noto-core carries the scripts that
+# fonts-indic does NOT: Arabic/Naskh (Urdu, Kashmiri, Sindhi), Ol Chiki
+# (Santali) and Meetei Mayek (Manipuri). fonts-noto-cjk + ui-core round out the
+# base. (look.list also ships fonts-noto-extra.)
+fonts-noto-core
 fonts-noto-cjk
 fonts-noto-ui-core
 
-# Script-specific coverage for the alpha languages
-fonts-deva           # Devanagari (Hindi, Marathi, ...)
+# Indic scripts: fonts-indic is the umbrella metapackage (Devanagari, Bengali/
+# Assamese, Gujarati, Gurmukhi/Punjabi, Kannada, Malayalam, Odia, Tamil, Telugu).
+# The Devanagari fonts also cover Hindi, Marathi, Sanskrit, Nepali, Konkani,
+# Maithili, Bodo and Dogri. The specific packages below are kept as explicit
+# guarantees for the most-used scripts even if the metapackage changes.
+fonts-indic          # umbrella metapackage for Indic fonts
+fonts-deva           # Devanagari (Hindi, Marathi, Sanskrit, Nepali, ...)
 fonts-beng           # Bengali / Assamese
 fonts-lohit-taml     # Tamil (package is fonts-lohit-taml, not fonts-tamil)
-fonts-indic          # umbrella metapackage for Indic fonts
 
 # Hunspell spell-check (no en-IN package exists; en-GB is the closest fit)
 hunspell
